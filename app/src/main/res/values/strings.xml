@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Task Planner</string>
+    <string name="tasks_text">Задачи</string>
+    <string name="no_tasks_text">Задачи отсутствуют</string>
 </resources>
