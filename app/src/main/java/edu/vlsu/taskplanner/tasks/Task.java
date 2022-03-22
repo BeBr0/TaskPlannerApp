@@ -48,11 +48,11 @@ public class Task {
 
     final int id; // ??
 
-    String displayName;
-    String description;
+    private String displayName;
+    private String description;
 
-    Calendar startTime;
-    Calendar endTime;
+    private Calendar startTime;
+    private Calendar endTime;
 
     public Task(int id, String displayName, String description, Calendar startTime, Context context, @Nullable Calendar endTime) {
         this.id = id;
@@ -104,5 +104,13 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public Calendar getStartTime() {
+        return startTime;
+    }
+
+    public Calendar getEndTime() {
+        return endTime;
     }
 }
