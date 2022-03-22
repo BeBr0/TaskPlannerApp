@@ -16,15 +16,16 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
 
     public class TaskHolder extends RecyclerView.ViewHolder{
 
-//        Button taskButton;
         TextView title, description, time;
+        Button taskOpenButton;
 
         public TaskHolder(@NonNull View itemView) {
             super(itemView);
-//            this.taskButton = itemView.findViewById(R.id.task_item_button);
+
             this.title = itemView.findViewById(R.id.title);
             this.description = itemView.findViewById(R.id.description);
             this.time = itemView.findViewById(R.id.time);
+            this.taskOpenButton = itemView.findViewById(R.id.task_button);
         }
     }
 
@@ -43,7 +44,11 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
     public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
         Task task = Task.taskList.get(position);
 
-        // Set item views based on your views and data model
+        Button button = holder.taskOpenButton;
+        button.setOnClickListener((View btn) -> {
+            // TODO: Pop out task screen
+        });
+
         TextView title = holder.title;
         title.setText(task.getDisplayName());
 
@@ -52,6 +57,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
 
         TextView time = holder.time;
         String timeText;
+
         if (task.getEndTime() == null) {
             timeText = task.getStartTime().getTime().getHours() + ":" + task.getStartTime().getTime().getMinutes();
         }

@@ -1,4 +1,4 @@
-package edu.vlsu.taskplanner;
+package edu.vlsu.taskplanner.alarm;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
@@ -9,6 +9,8 @@ import android.content.ContextWrapper;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
+
+import edu.vlsu.taskplanner.R;
 
 public class NotificationHelper  extends ContextWrapper {
     public static final String channel1ID = "channel1ID";

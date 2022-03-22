@@ -1,4 +1,4 @@
-package edu.vlsu.taskplanner;
+package edu.vlsu.taskplanner.alarm;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -10,7 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-public class TimePickerFragment extends DialogFragment {
+public class
+TimePickerFragment extends DialogFragment {
     @NonNull
     @Override
     /* open time picker */

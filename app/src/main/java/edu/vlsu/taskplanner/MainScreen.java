@@ -1,20 +1,16 @@
 package edu.vlsu.taskplanner;
 
+import android.icu.util.GregorianCalendar;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.icu.util.GregorianCalendar;
-import android.os.Bundle;
-import android.widget.TextView;
-
-import java.util.Date;
-
-import edu.vlsu.taskplanner.tasks.DatabaseWorker;
 import edu.vlsu.taskplanner.tasks.Task;
 import edu.vlsu.taskplanner.tasks.TaskViewAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,5 +19,14 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.tasks_recycler_view);
         recyclerView.setAdapter(new TaskViewAdapter());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // EDIT
+
+        Task task = new Task("name", "desc", new GregorianCalendar(0, 0, 0, 10, 10), this, null);
+        System.out.println(task.getStartTime());
+        Task.addTask(task);
     }
+
+
 }

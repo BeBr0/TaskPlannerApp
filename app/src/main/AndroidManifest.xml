@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaskPlanner">
         <activity
-            android:name=".MainActivity"
+            android:name=".LoadScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,17 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".broadcast.myBroadcastReceiver"/>
+        <activity
+            android:name=".MainScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".alarm.myBroadcastReceiver"/>
     </application>
 
 </manifest>

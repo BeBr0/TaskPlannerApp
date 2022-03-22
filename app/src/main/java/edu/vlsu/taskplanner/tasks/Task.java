@@ -1,43 +1,41 @@
 package edu.vlsu.taskplanner.tasks;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Typeface;
 import android.icu.util.Calendar;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.vlsu.taskplanner.MainActivity;
-import edu.vlsu.taskplanner.NotificationHelper;
-import edu.vlsu.taskplanner.R;
-import edu.vlsu.taskplanner.broadcast.myBroadcastReceiver;
+import edu.vlsu.taskplanner.alarm.NotificationHelper;
+import edu.vlsu.taskplanner.alarm.myBroadcastReceiver;
 
 public class Task {
     static NotificationHelper notificationHelper;
-    static CardView tasksCardView;
-    public static DatabaseWorker dbWorker;
+    public static TasksDBWorker dbWorker;
 
-    static List<Task> taskList = new ArrayList<>();
+    public static List<Task> taskList = new ArrayList<>();
+
+    /** Используется только при загрузке приложения! */
+    public static void addTaskToList(Task task){
+        taskList.add(task);
+    }
 
     public static void addTask(Task task){
         taskList.add(task);
 
-        dbWorker.getWritableDatabase().execSQL("INSERT INTO tasks VALUES" +
-                "(" + task.id + ", '" + task.displayName + "', '" + task.description + "', " + task.startTime.getTime().getTime() + ");");
+        if (task.endTime == null)
+            dbWorker.getWritableDatabase().execSQL("INSERT INTO tasks VALUES" +
+                    "(" + task.id + ", '" + task.displayName + "', '" + task.description + "', " +
+                    task.startTime.getTime().getTime() + -1 + ");");
+        else
+            dbWorker.getWritableDatabase().execSQL("INSERT INTO tasks VALUES" +
+                    "(" + task.id + ", '" + task.displayName + "', '" + task.description + "', " +
+                    task.startTime.getTime().getTime() + task.endTime.getTime().getTime() + ");");
     }
 
     public static void removeTask(Task task){
@@ -46,13 +44,23 @@ public class Task {
         dbWorker.getWritableDatabase().execSQL("DELETE FROM tasks WHERE id = " + task.id);
     }
 
-    final int id; // ??
+    private final int id;
 
     private String displayName;
     private String description;
 
-    private Calendar startTime;
-    private Calendar endTime;
+    private final Calendar startTime;
+    private final Calendar endTime;
+
+    public Task(String displayName, String description, Calendar startTime, Context context, @Nullable Calendar endTime) {
+        this.id = taskList.size();
+        this.displayName = displayName;
+        this.description = description;
+        this.startTime = startTime;
+        this.endTime = endTime;
+
+        notificationHelper = new NotificationHelper(context);
+    }
 
     public Task(int id, String displayName, String description, Calendar startTime, Context context, @Nullable Calendar endTime) {
         this.id = id;
