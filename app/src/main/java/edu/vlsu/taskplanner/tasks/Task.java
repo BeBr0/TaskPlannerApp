@@ -9,6 +9,7 @@ import android.icu.util.Calendar;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import edu.vlsu.taskplanner.alarm.NotificationHelper;
@@ -31,11 +32,11 @@ public class Task {
         if (task.endTime == null)
             dbWorker.getWritableDatabase().execSQL("INSERT INTO tasks VALUES" +
                     "(" + task.id + ", '" + task.displayName + "', '" + task.description + "', " +
-                    task.startTime.getTime().getTime() + -1 + ");");
+                    task.startTime.getTime().getTime() + ", " + task.alarmNeeded + ", " + -1 + ");");
         else
             dbWorker.getWritableDatabase().execSQL("INSERT INTO tasks VALUES" +
                     "(" + task.id + ", '" + task.displayName + "', '" + task.description + "', " +
-                    task.startTime.getTime().getTime() + task.endTime.getTime().getTime() + ");");
+                    task.startTime.getTime().getTime() + ", " + task.endTime.getTime().getTime() + ");");
     }
 
     public static void removeTask(Task task){
@@ -49,10 +50,12 @@ public class Task {
     private String displayName;
     private String description;
 
-    private final Calendar startTime;
-    private final Calendar endTime;
+    private boolean alarmNeeded = false;
 
-    public Task(String displayName, String description, Calendar startTime, Context context, @Nullable Calendar endTime) {
+    private Calendar startTime;
+    private Calendar endTime;
+
+    public Task(String displayName, String description, Calendar startTime, Context context, boolean alarmNeeded, @Nullable Calendar endTime) {
         this.id = taskList.size();
         this.displayName = displayName;
         this.description = description;
@@ -60,14 +63,18 @@ public class Task {
         this.endTime = endTime;
 
         notificationHelper = new NotificationHelper(context);
+
+        if (alarmNeeded)
+            startAlarm(context);
     }
 
-    public Task(int id, String displayName, String description, Calendar startTime, Context context, @Nullable Calendar endTime) {
+    public Task(int id, String displayName, String description, Calendar startTime, Context context, boolean alarmNeeded, @Nullable Calendar endTime) {
         this.id = id;
         this.displayName = displayName;
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.alarmNeeded = alarmNeeded;
 
         notificationHelper = new NotificationHelper(context);
     }
@@ -87,6 +94,16 @@ public class Task {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
 
         alarmManager.cancel(pendingIntent);
+    }
+
+    public String formStartDateString(){
+        return "Дата: " + startTime.getTime().getDate()+ "." + startTime.getTime().getMonth() + "." + (startTime.getTime().getYear() + 1900)
+                + ", Время: " + startTime.getTime().getHours() + ":" + startTime.getTime().getMinutes();
+    }
+
+    public String formEndDateString(){
+        return "Дата: " + endTime.getTime().getDate() + "." + endTime.getTime().getMonth() + "." + endTime.getTime().getYear()
+                + ", Время: " + endTime.getTime().getHours() + ":" + endTime.getTime().getMinutes();
     }
 
     /* notificationHelper.getChannelNotification() */
@@ -120,5 +137,17 @@ public class Task {
 
     public Calendar getEndTime() {
         return endTime;
+    }
+
+    public boolean isAlarmNeeded() {
+        return alarmNeeded;
+    }
+
+    public void setStartTime(Calendar startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(Calendar endTime) {
+        this.endTime = endTime;
     }
 }

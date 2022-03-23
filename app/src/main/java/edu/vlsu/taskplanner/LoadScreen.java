@@ -20,37 +20,41 @@ public class LoadScreen extends AppCompatActivity {
         setContentView(R.layout.load_screen);
         Task.dbWorker = new TasksDBWorker(this);
 
+        Task.dbWorker.clearTable("tasks");
+
         loadDataFromDataBase();
 
         startActivity(new Intent(LoadScreen.this, MainScreen.class));
     }
 
     private void loadDataFromDataBase(){
-        Cursor c = Task.dbWorker.getReadableDatabase().rawQuery("SELECT * FROM tasks",null);
-        while (c.moveToNext()) {
+        Cursor cursor = Task.dbWorker.getReadableDatabase().rawQuery("SELECT * FROM tasks",null);
+        while (cursor.moveToNext()) {
             Calendar startTime = Calendar.getInstance();
-            startTime.setTime(new Date(Long.parseLong(c.getString(3))));
+            startTime.setTime(new Date(Long.parseLong(cursor.getString(3))));
 
             Task task;
-            if (c.isNull(4)) {
+            if (cursor.isNull(4)) {
                 task = new Task(
-                        Integer.parseInt(c.getString(0)),
-                        c.getString(1),
-                        c.getString(2),
+                        Integer.parseInt(cursor.getString(0)),
+                        cursor.getString(1),
+                        cursor.getString(2),
                         startTime,
                         this,
+                        Boolean.parseBoolean(cursor.getString(3)),
                         null
                 );
             }
             else {
                 Calendar endTime = Calendar.getInstance();
-                endTime.setTime(new Date(Long.parseLong(c.getString(4))));
+                endTime.setTime(new Date(Long.parseLong(cursor.getString(4))));
                 task = new Task(
-                        Integer.parseInt(c.getString(0)),
-                        c.getString(1),
-                        c.getString(2),
+                        Integer.parseInt(cursor.getString(0)),
+                        cursor.getString(1),
+                        cursor.getString(2),
                         startTime,
                         this,
+                        Boolean.parseBoolean(cursor.getString(3)),
                         endTime
                 );
             }
@@ -58,13 +62,6 @@ public class LoadScreen extends AppCompatActivity {
             Task.addTaskToList(task);
         }
 
-        c.close();
+        cursor.close();
     }
-
-//    /** Проеряет есть ли часы и минуты у даты */
-//    private void checkDateFields(Date date){
-//        try{
-//
-//        }
-//    }
 }

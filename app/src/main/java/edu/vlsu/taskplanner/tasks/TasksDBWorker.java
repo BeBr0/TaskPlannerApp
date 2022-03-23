@@ -21,6 +21,7 @@ public class TasksDBWorker extends  SQLiteOpenHelper{
     static String NAME_COLUMN = "displayName";
     static String DESCRIPTION_COLUMN = "description";
     static String START_DATE_COLUMN = "startDate";
+    static String ALARM_NEEDED = "alarmNeeded";
     static String END_DATE_COLUMN = "endDate";
 
     public TasksDBWorker(@Nullable Context context) {
@@ -34,6 +35,7 @@ public class TasksDBWorker extends  SQLiteOpenHelper{
                     NAME_COLUMN + " TEXT," +
                     DESCRIPTION_COLUMN + " TEXT," +
                     START_DATE_COLUMN + " INTEGER," +
+                    ALARM_NEEDED + " TEXT," +
                     END_DATE_COLUMN + " INTEGER" +
                     ")");
     }
@@ -42,5 +44,9 @@ public class TasksDBWorker extends  SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS tasks");
         onCreate(sqLiteDatabase);
+    }
+
+    public void clearTable(String name){
+        getWritableDatabase().execSQL("DELETE FROM " + name);
     }
 }

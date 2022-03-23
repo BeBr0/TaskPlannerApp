@@ -1,6 +1,8 @@
 package edu.vlsu.taskplanner.tasks;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import edu.vlsu.taskplanner.EditTaskScreen;
 import edu.vlsu.taskplanner.R;
 
 public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHolder> {
@@ -46,7 +49,9 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
 
         Button button = holder.taskOpenButton;
         button.setOnClickListener((View btn) -> {
-            // TODO: Pop out task screen
+            Intent intent = new Intent(holder.description.getContext(), EditTaskScreen.class);
+            intent.putExtra("task", Task.taskList.indexOf(task));
+            holder.taskOpenButton.getContext().startActivity(intent);
         });
 
         TextView title = holder.title;
