@@ -8,14 +8,18 @@ import android.icu.util.Calendar;
 
 import androidx.annotation.Nullable;
 
+import java.text.DateFormat;
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import edu.vlsu.taskplanner.alarm.NotificationHelper;
 import edu.vlsu.taskplanner.alarm.myBroadcastReceiver;
 
-public class Task {
+public class Task implements Cloneable{
     static NotificationHelper notificationHelper;
     public static TasksDBWorker dbWorker;
 
@@ -54,6 +58,8 @@ public class Task {
 
     private Calendar startTime;
     private Calendar endTime;
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat("Дата: dd.MM.yyyy, Время: HH:mm", Locale.ENGLISH);
 
     public Task(String displayName, String description, Calendar startTime, Context context, boolean alarmNeeded, @Nullable Calendar endTime) {
         this.id = taskList.size();
@@ -97,19 +103,31 @@ public class Task {
     }
 
     public String formStartDateString(){
-        return "Дата: " + startTime.getTime().getDate()+ "." + startTime.getTime().getMonth() + "." + (startTime.getTime().getYear() + 1900)
-                + ", Время: " + startTime.getTime().getHours() + ":" + startTime.getTime().getMinutes();
+        return dateFormat.format(startTime.getTime());
     }
 
     public String formEndDateString(){
-        return "Дата: " + endTime.getTime().getDate() + "." + endTime.getTime().getMonth() + "." + endTime.getTime().getYear()
-                + ", Время: " + endTime.getTime().getHours() + ":" + endTime.getTime().getMinutes();
+        return dateFormat.format(endTime.getTime());
     }
 
     /* notificationHelper.getChannelNotification() */
 
+    @Override
+    public Task clone(){
+        try {
+            return (Task) super.clone();
+        }
+        catch (CloneNotSupportedException e){
+            e.printStackTrace();
+            return this;
+        }
+    }
 
             /* Getter & Setter */
+
+    public String getMonthAndDayString(){
+        return startTime.get(Calendar.DAY_OF_MONTH) + " " + new DateFormatSymbols().getMonths()[startTime.get(Calendar.MONTH)];
+    }
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
@@ -149,5 +167,9 @@ public class Task {
 
     public void setEndTime(Calendar endTime) {
         this.endTime = endTime;
+    }
+
+    public void setAlarmNeeded(boolean alarmNeeded) {
+        this.alarmNeeded = alarmNeeded;
     }
 }

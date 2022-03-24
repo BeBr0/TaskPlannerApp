@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -20,6 +21,8 @@ import edu.vlsu.taskplanner.tasks.Task;
 
 public class EditTaskScreen extends AppCompatActivity {
 
+    private Task task;
+
     @Override
     protected void onCreate(Bundle savedScreenInstance) {
         super.onCreate(savedScreenInstance);
@@ -30,27 +33,56 @@ public class EditTaskScreen extends AppCompatActivity {
         TextView startPickerButton = findViewById(R.id.form_start_date);
         TextView endPickerButton = findViewById(R.id.form_end_date);
 
-        startPickerButton.setOnClickListener(this::onPopUpBtnClicked);
-        endPickerButton.setOnClickListener(this::onPopUpBtnClicked);
+        startPickerButton.setOnClickListener(this::onPopUpTimeBtnClicked);
+        endPickerButton.setOnClickListener(this::onPopUpTimeBtnClicked);
+
+        final Task initialTask;
 
         if (index == -1){
-
+            initialTask = null;
+            task = null;
         }
         else{
-            Task task = Task.taskList.get(index);
-            ((TextView) findViewById(R.id.form_title)).setText(task.getDisplayName());
-            ((TextView) findViewById(R.id.form_description)).setText(task.getDescription());
-            String startTime = task.formStartDateString();
-            ((TextView) findViewById(R.id.form_start_date)).setText(startTime);
+            task = Task.taskList.get(index);
+            initialTask = task.clone();
 
-            if (task.getEndTime() != null) {
-                String endTime = task.formEndDateString();
-                ((TextView) findViewById(R.id.form_end_date)).setText(endTime);
+            update();
+        }
+
+        findViewById(R.id.submit_task).setOnClickListener((View view) -> {
+            if (task != null) {
+                task.setDisplayName(((TextView) findViewById(R.id.form_title)).getText().toString());
+                task.setDescription(((TextView) findViewById(R.id.form_description)).getText().toString());
+                task.setAlarmNeeded(((CheckBox)findViewById(R.id.notification_check)).isChecked());
+
+                Task.taskList.set(index, task);
             }
+
+            Intent intent = new Intent(EditTaskScreen.this, MainScreen.class);
+            startActivity(intent);
+        });
+
+        findViewById(R.id.cancel_task).setOnClickListener((View view) -> {
+            Task.taskList.set(index, initialTask);
+
+            Intent intent = new Intent(EditTaskScreen.this, MainScreen.class);
+            startActivity(intent);
+        });
+    }
+
+    private void update(){
+        ((TextView) findViewById(R.id.form_title)).setText(task.getDisplayName());
+        ((TextView) findViewById(R.id.form_description)).setText(task.getDescription());
+        String startTime = task.formStartDateString();
+        ((TextView) findViewById(R.id.form_start_date)).setText(startTime);
+
+        if (task.getEndTime() != null) {
+            String endTime = task.formEndDateString();
+            ((TextView) findViewById(R.id.form_end_date)).setText(endTime);
         }
     }
 
-    private void onPopUpBtnClicked(View view) {
+    private void onPopUpTimeBtnClicked(View view) {
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
 
         View popUpDatePickerView = layoutInflater.inflate(R.layout.popup_date_picker, null);
@@ -64,20 +96,14 @@ public class EditTaskScreen extends AppCompatActivity {
         Button cancel = popupDatePicker.getContentView().findViewById(R.id.cancel_date);
 
         View popupTimePickerView = layoutInflater.inflate(R.layout.popup_time_picker, null);
-        ;
+
         submit.setOnClickListener((View v) -> {
             popupDatePicker.dismiss();
             DatePicker datePicker = popUpDatePickerView.findViewById(R.id.date_picker);
-            Task task = Task.taskList.get(getIntent().getIntExtra("task", -1));
+            int index = getIntent().getIntExtra("task", -1);
 
             Calendar calendar = Calendar.getInstance();
-            calendar.getTime().setYear(datePicker.getYear());
-            calendar.getTime().setMonth(datePicker.getMonth());
-            calendar.getTime().setDate(datePicker.getDayOfMonth());
-            calendar.getTime().setHours(task.getStartTime().getTime().getHours());
-            calendar.getTime().setMinutes(task.getStartTime().getTime().getMinutes());
-
-            task.setStartTime(calendar);
+            calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
 
             final PopupWindow popUpTimePicker = new PopupWindow(popupTimePickerView, LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT, true);
@@ -89,18 +115,16 @@ public class EditTaskScreen extends AppCompatActivity {
 
             submitTime.setOnClickListener((View view1) -> {
                 TimePicker timePicker = popupTimePickerView.findViewById(R.id.time_picker);
-                calendar.getTime().setHours(timePicker.getHour());
-                calendar.getTime().setMinutes(timePicker.getMinute());
+                calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH), timePicker.getHour(), timePicker.getMinute());
 
-                task.setStartTime(calendar);
-                Intent intent = new Intent(EditTaskScreen.this, EditTaskScreen.class);
-                intent.putExtra("task", Task.taskList.indexOf(task));
+                if (view.getId() == R.id.form_start_date)
+                    task.setStartTime(calendar);
+                else
+                    task.setEndTime(calendar);
 
-                startActivity(intent);
+                update();
 
-                System.out.println(datePicker.getDayOfMonth() + " - " + task.getStartTime().getTime().getDay() + " " + task.getStartTime().getTime().getDate());
-                System.out.println(datePicker.getMonth() + " - " + task.getStartTime().getTime().getMonth());
-                System.out.println(datePicker.getYear() + " - " + task.getStartTime().getTime().getYear());
                 popUpTimePicker.dismiss();
             });
 

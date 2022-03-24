@@ -22,9 +22,6 @@ public class MainScreen extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // EDIT
-        System.out.println(Task.taskList);
-        Task task = new Task("name", "desc", new GregorianCalendar(2020, 7, 24, 11, 10), this, false, null);
-        Task.addTask(task);
     }
 
 

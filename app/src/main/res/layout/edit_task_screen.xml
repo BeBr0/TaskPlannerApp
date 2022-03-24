@@ -86,7 +86,7 @@
             android:text="@string/start_time"
             android:textAlignment="center"
             android:textColor="@color/orange"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +100,7 @@
             android:gravity="center"
             android:text="@string/end_time"
             android:textColor="@color/orange"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/form_start_date" />
 
@@ -129,7 +129,7 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/notification_check"
+                app:layout_constraintStart_toStartOf="@+id/notification_check"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

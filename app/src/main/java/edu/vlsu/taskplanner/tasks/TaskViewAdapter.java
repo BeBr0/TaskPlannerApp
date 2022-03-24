@@ -2,7 +2,6 @@ package edu.vlsu.taskplanner.tasks;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +18,14 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
 
     public class TaskHolder extends RecyclerView.ViewHolder{
 
-        TextView title, description, time;
+        TextView title, date, time;
         Button taskOpenButton;
 
         public TaskHolder(@NonNull View itemView) {
             super(itemView);
 
             this.title = itemView.findViewById(R.id.title);
-            this.description = itemView.findViewById(R.id.description);
+            this.date = itemView.findViewById(R.id.date);
             this.time = itemView.findViewById(R.id.time);
             this.taskOpenButton = itemView.findViewById(R.id.task_button);
         }
@@ -49,7 +48,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
 
         Button button = holder.taskOpenButton;
         button.setOnClickListener((View btn) -> {
-            Intent intent = new Intent(holder.description.getContext(), EditTaskScreen.class);
+            Intent intent = new Intent(holder.date.getContext(), EditTaskScreen.class);
             intent.putExtra("task", Task.taskList.indexOf(task));
             holder.taskOpenButton.getContext().startActivity(intent);
         });
@@ -57,8 +56,8 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
         TextView title = holder.title;
         title.setText(task.getDisplayName());
 
-        TextView description = holder.description;
-        description.setText(task.getDescription());
+        TextView date = holder.date;
+        date.setText(task.getMonthAndDayString());
 
         TextView time = holder.time;
         String timeText;

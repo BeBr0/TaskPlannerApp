@@ -20,8 +20,6 @@ public class LoadScreen extends AppCompatActivity {
         setContentView(R.layout.load_screen);
         Task.dbWorker = new TasksDBWorker(this);
 
-        Task.dbWorker.clearTable("tasks");
-
         loadDataFromDataBase();
 
         startActivity(new Intent(LoadScreen.this, MainScreen.class));
