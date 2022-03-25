@@ -14,15 +14,15 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/task"
+            android:id="@+id/tasks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/miriadpro"
-            android:text="@string/task"
-            android:textStyle="bold"
-            android:textColor="@color/white"
+            android:fontFamily="sans-serif"
+            android:text="@string/tasks_text"
             android:textAlignment="center"
             android:textSize="40sp"
+            android:paddingTop="10dp"
+            app:flow_verticalAlign="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
             android:layout_height="50dp"
             android:layout_margin="5dp"
             android:paddingTop="10dp"
-            android:src="@drawable/icontrue3"
+            android:src="@drawable/ic_launcher_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

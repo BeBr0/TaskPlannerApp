@@ -26,9 +26,6 @@
         <activity android:name=".EditTaskScreen" />
 
         <receiver android:name=".alarm.myBroadcastReceiver"/>
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
