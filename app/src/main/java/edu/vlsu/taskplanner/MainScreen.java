@@ -19,10 +19,12 @@ public class MainScreen extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.tasks_recycler_view);
         recyclerView.setAdapter(new TaskViewAdapter());
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // EDIT
+
+        System.out.println(Task.taskList);
+
+        Task.sort((TaskViewAdapter) recyclerView.getAdapter());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
-
 }
