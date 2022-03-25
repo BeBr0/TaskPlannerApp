@@ -21,6 +21,7 @@
         android:id="@+id/submit_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/miriadpro"
         android:text="@string/submit_task"
         app:layout_constraintStart_toStartOf="@+id/date_picker"
         app:layout_constraintTop_toBottomOf="@+id/date_picker" />
@@ -29,6 +30,7 @@
         android:id="@+id/cancel_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/miriadpro"
         android:text="@string/cancel"
         app:layout_constraintEnd_toEndOf="@+id/date_picker"
         app:layout_constraintTop_toBottomOf="@+id/date_picker" />
