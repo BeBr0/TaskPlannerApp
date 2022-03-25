@@ -39,20 +39,20 @@ public class LoadScreen extends AppCompatActivity {
                         cursor.getString(2),
                         startTime,
                         this,
-                        Boolean.parseBoolean(cursor.getString(3)),
+                        Boolean.parseBoolean(cursor.getString(4)),
                         null
                 );
             }
             else {
                 Calendar endTime = Calendar.getInstance();
-                endTime.setTime(new Date(Long.parseLong(cursor.getString(4))));
+                endTime.setTime(new Date(Long.parseLong(cursor.getString(5))));
                 task = new Task(
                         Integer.parseInt(cursor.getString(0)),
                         cursor.getString(1),
                         cursor.getString(2),
                         startTime,
                         this,
-                        Boolean.parseBoolean(cursor.getString(3)),
+                        Boolean.parseBoolean(cursor.getString(4)),
                         endTime
                 );
             }

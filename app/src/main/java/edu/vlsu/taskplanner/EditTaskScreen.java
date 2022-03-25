@@ -56,6 +56,8 @@ public class EditTaskScreen extends AppCompatActivity {
                 task.setAlarmNeeded(((CheckBox)findViewById(R.id.notification_check)).isChecked());
 
                 Task.taskList.set(index, task);
+
+                Task.update(task);
             }
 
             Intent intent = new Intent(EditTaskScreen.this, MainScreen.class);

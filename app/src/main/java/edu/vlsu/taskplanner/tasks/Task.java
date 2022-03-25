@@ -2,6 +2,7 @@ package edu.vlsu.taskplanner.tasks;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
@@ -47,6 +48,19 @@ public class Task implements Cloneable{
         taskList.remove(task);
 
         dbWorker.getWritableDatabase().execSQL("DELETE FROM tasks WHERE id = " + task.id);
+    }
+
+    public static void update(Task task){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TasksDBWorker.NAME_COLUMN, task.displayName);
+        contentValues.put(TasksDBWorker.DESCRIPTION_COLUMN, task.displayName);
+        contentValues.put(TasksDBWorker.START_DATE_COLUMN, task.startTime.getTime().getTime());
+        contentValues.put(TasksDBWorker.ALARM_NEEDED, task.alarmNeeded);
+
+        if (task.endTime != null)
+            contentValues.put(TasksDBWorker.END_DATE_COLUMN, task.endTime.getTime().getTime());
+
+        dbWorker.getWritableDatabase().update("tasks", contentValues, "id = " + task.id, new String[]{});
     }
 
     private final int id;
