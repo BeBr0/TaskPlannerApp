@@ -20,7 +20,6 @@
         android:id="@+id/submit_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/miriadpro"
         android:text="@string/submit_task"
         app:layout_constraintStart_toStartOf="@+id/time_picker"
         app:layout_constraintTop_toBottomOf="@+id/time_picker" />
@@ -29,7 +28,6 @@
         android:id="@+id/cancel_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/miriadpro"
         android:text="@string/cancel"
         app:layout_constraintEnd_toEndOf="@+id/time_picker"
         app:layout_constraintTop_toBottomOf="@+id/time_picker" />
