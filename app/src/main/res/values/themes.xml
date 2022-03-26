@@ -1,17 +1,33 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.TaskPlanner" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.TaskPlanner.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/orange</item>
-        <item name="colorPrimaryVariant">@color/white</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/orange</item>
-        <item name="colorSecondaryVariant">@color/orange</item>
-        <item name="colorOnSecondary">@color/orange</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondary</item>
         <!-- Customize your theme here. -->
-        <item name="buttonStyle">@color/orange</item>
+
+        <item name="background">@color/light_main</item>
+        <item name="android:textColor">@color/light_secondary</item>
+        <item name="android:textColorHint">@color/light_secondary</item>
+    </style>
+
+    <style name="Theme_toolBar">
+        <item name="android:background">@color/light_secondary</item>
+        <item name="android:textColor">@color/light_main</item>
+    </style>
+
+    <style name="Theme_buttonStyle">
+        <item name="android:background">@color/light_secondary</item>
+        <item name="android:textColor">@color/light_main</item>
+    </style>
+
+    <style name="Theme_separate_line">
+        <item name="android:background">@color/light_secondary</item>
+    </style>
+
+    <style name="Theme_edit_form">
+        <item name="android:textColor">@color/light_secondary</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

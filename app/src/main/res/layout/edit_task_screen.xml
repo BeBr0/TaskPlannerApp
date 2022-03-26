@@ -1,83 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    style="@style/Theme.TaskPlanner.Light">
 
-    // TODO: CONSTRAINT TO TOP WITH PADDING
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/orange"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/task"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="@string/task"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textAlignment="center"
-            android:textSize="40sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/ic_launcher_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/Theme_edit_form"
         android:id="@+id/task_data"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintTop_toBottomOf="@+id/include"
         android:layout_marginTop="100dp">
 
         <EditText
+            style="@style/Theme_edit_form"
             android:id="@+id/form_title"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@drawable/rectangle"
             android:hint="@string/task_title"
             android:textAlignment="center"
-            android:textColorHint="@color/orange"
             app:flow_verticalAlign="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            style="@style/Theme_edit_form"
             android:id="@+id/form_description"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@drawable/rectangle"
             android:hint="@string/task_description"
             android:textAlignment="center"
-            android:textColorHint="@color/orange"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/form_title" />
 
         <TextView
+            style="@style/Theme_edit_form"
             android:id="@+id/form_start_date"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -85,23 +53,18 @@
             android:gravity="center"
             android:text="@string/start_time"
             android:textAlignment="center"
-            android:textColor="@color/orange"
-            android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/form_description" />
 
         <TextView
+            style="@style/Theme_edit_form"
             android:id="@+id/form_end_date"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@drawable/rectangle"
             android:gravity="center"
             android:text="@string/end_time"
-            android:textColor="@color/orange"
-            android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/form_start_date" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -118,38 +81,42 @@
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/Theme_edit_form"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/notification"
-                android:textColor="@color/orange"
-                android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/notification_check"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/Theme_edit_form"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
+        style="@style/Theme_buttonStyle"
         android:id="@+id/cancel_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
+        android:textSize="20sp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/task_data"
         app:layout_constraintTop_toBottomOf="@+id/task_data" />
 
     <Button
+        style="@style/Theme_buttonStyle"
         android:id="@+id/submit_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/submit_task"
+        android:textSize="20sp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/task_data"
         app:layout_constraintTop_toBottomOf="@+id/task_data" />

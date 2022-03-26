@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:timePickerMode="spinner"
         android:background="@drawable/calendar_background"
-        android:calendarTextColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

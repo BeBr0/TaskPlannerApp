@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TaskPlanner">
+        android:theme="@style/Theme.TaskPlanner.Light">
         <activity
             android:name=".LoadScreen"
             android:exported="true">
@@ -24,6 +24,7 @@
 
         <activity android:name=".MainScreen"/>
         <activity android:name=".EditTaskScreen" />
+        <activity android:name=".ToolBarActivity" />
 
         <receiver android:name=".alarm.myBroadcastReceiver"/>
     </application>
