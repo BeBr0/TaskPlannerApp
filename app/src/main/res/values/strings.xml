@@ -5,9 +5,10 @@
     <string name="task_description">Описание</string>
     <string name="start_time">Дата и время начала</string>
     <string name="end_time">Время окончания</string>
-    <string name="submit_task">Save</string>
+    <string name="submit_task">Сохранить</string>
     <string name="cancel">Отменить</string>
-    <string name="notification">Notification</string>
-    <string name="no_tasks_text">Задачи отсутсвуют</string>
-    <string name="tasks_text">Tasks</string>
+    <string name="notification">Напоминание</string>
+    <string name="tasks_text">Задачи</string>
+    <string name="no_tasks_text">Задачи отсутствуют</string>
+    <string name="no_tasks_text">З</string>
 </resources>
