@@ -9,9 +9,9 @@
         <entry key="app/src/main/res/drawable/rectangle.xml" value="0.3575" />
         <entry key="app/src/main/res/layout/activity_load_screen.xml" value="0.24909420289855072" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35625" />
-        <entry key="app/src/main/res/layout/edit_task_screen.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/edit_task_screen.xml" value="0.33" />
         <entry key="app/src/main/res/layout/load_screen.xml" value="0.22327898550724637" />
-        <entry key="app/src/main/res/layout/main_screen.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/main_screen.xml" value="0.25" />
         <entry key="app/src/main/res/layout/popup_date_picker.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/popup_time_picker.xml" value="0.33" />
         <entry key="app/src/main/res/layout/task_item.xml" value="0.35625" />

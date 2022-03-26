@@ -1,6 +1,7 @@
 package edu.vlsu.taskplanner;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import edu.vlsu.taskplanner.tasks.Task;
 
@@ -24,9 +26,18 @@ public class EditTaskScreen extends AppCompatActivity {
     private Task task;
 
     @Override
+    public Resources.Theme getTheme(){
+        Resources.Theme theme = super.getTheme();
+        theme.applyStyle(Settings.currentTheme, true);
+        return theme;
+    }
+
+    @Override
     protected void onCreate(Bundle savedScreenInstance) {
         super.onCreate(savedScreenInstance);
         setContentView(R.layout.edit_task_screen);
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
         int index = getIntent().getIntExtra("task", -1);
 

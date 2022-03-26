@@ -7,6 +7,7 @@ import android.icu.util.GregorianCalendar;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.sql.Date;
 
@@ -17,11 +18,14 @@ public class LoadScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(Settings.currentTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.load_screen);
         Task.dbWorker = new TasksDBWorker(this);
 
         Task.dbWorker.clearTable("tasks");
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
         loadDataFromDataBase();
 
