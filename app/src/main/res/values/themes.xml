@@ -2,16 +2,16 @@
     <!-- Base application theme. -->
     <style name="Theme.TaskPlanner" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/orange</item>
-        <item name="colorPrimaryVariant">@color/white</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/light_main</item>
+        <item name="colorPrimaryVariant">@color/light_secondary</item>
+        <item name="colorOnPrimary">@color/light_secondary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/orange</item>
-        <item name="colorSecondaryVariant">@color/orange</item>
-        <item name="colorOnSecondary">@color/orange</item>
+        <item name="colorSecondary">@color/light_main</item>
+        <item name="colorSecondaryVariant">@color/light_main</item>
+        <item name="colorOnSecondary">@color/light_main</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="buttonStyle">@color/orange</item>
+        <item name="buttonStyle">@color/light_main</item>
     </style>
 </resources>
