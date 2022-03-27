@@ -1,47 +1,51 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <!-- Base application theme. -->
-    <style name="Theme_Base_Dark" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Primary brand color. -->
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondary</item>
-        <!-- Customize your theme here. -->
-
+    <style name="Dark_MainScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:textViewStyle">@style/Dark_TaskTextView</item>
         <item name="android:background">@color/dark_main</item>
+
+        <item name="android:toolbarStyle">@style/Dark_Toolbar</item>
+        <item name="checkedTextViewStyle">@style/Dark_ToolbarTitle</item>
+    </style>
+
+    <style name="Dark_TaskTextView">
         <item name="android:textColor">@color/dark_secondary</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="Dark_EditTaskScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="editTextStyle">@style/Dark_EditText</item>
+        <item name="buttonStyle">@style/Dark_Button</item>
+        <item name="android:textViewStyle">@style/Dark_TaskEditTextView</item>
+        <item name="android:background">@color/dark_main</item>
+
+        <item name="android:toolbarStyle">@style/Dark_Toolbar</item>
+        <item name="checkedTextViewStyle">@style/Dark_ToolbarTitle</item>
+    </style>
+
+    <style name="Dark_TaskEditTextView">
+        <item name="android:textColor">@color/dark_secondary</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Dark_EditText">
+        <item name="android:textColor">@color/dark_secondary</item>
+        <item name="background">@drawable/form_item_dark</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColorHint">@color/dark_secondary</item>
-        <item name="android:editTextStyle">@style/Theme_edit_form_dark</item>
-        <item name="android:textViewStyle">@style/Theme_text_form_dark</item>
-        <item name="android:toolbarStyle">@style/Theme_toolBar_dark</item>
-        <item name="checkedTextViewStyle">@style/Theme_toolbar_title_dark</item>
     </style>
 
-    <style name="Theme_toolBar_dark">
-        <item name="android:background">@color/dark_secondary</item>
-    </style>
-
-    <style name="Theme_toolbar_title_dark">
+    <style name="Dark_Button">
+        <item name="android:background">@drawable/button_dark</item>
         <item name="android:textColor">@color/dark_main</item>
     </style>
 
-    <style name="Theme_buttonStyle_dark">
+    <!--Toolbar style-->
+
+    <style name="Dark_Toolbar">
         <item name="android:background">@color/dark_secondary</item>
+    </style>
+
+    <style name="Dark_ToolbarTitle">
         <item name="android:textColor">@color/dark_main</item>
-    </style>
-
-    <style name="Theme_separate_line_dark">
-        <item name="android:background">@color/dark_secondary</item>
-    </style>
-
-    <style name="Theme_text_form_dark">
-        <item name="android:textColor">@color/dark_secondary</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="Theme_edit_form_dark">
-        <item name="android:textColor">@color/dark_secondary</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:textStyle">bold</item>
     </style>
 </resources>

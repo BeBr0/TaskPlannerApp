@@ -2,6 +2,7 @@ package edu.vlsu.taskplanner.tasks;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
 
     @Override
     public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
+
         Task task = Task.taskList.get(position);
 
         Button button = holder.taskOpenButton;
