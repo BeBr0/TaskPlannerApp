@@ -17,19 +17,35 @@
         <item name="android:background">@color/light_main</item>
         <item name="buttonStyle">@style/Light_Button</item>
         <item name="android:textViewStyle">@style/Light_TaskEditTextView</item>
+        <item name="android:timePickerDialogTheme">@style/Light_DateAndTimePickers</item>
+        <item name="android:datePickerDialogTheme">@style/Light_DateAndTimePickers</item>
 
         <item name="android:toolbarStyle">@style/Light_Toolbar</item>
         <item name="checkedTextViewStyle">@style/Light_ToolbarTitle</item>
     </style>
 
+    <style name="Light_DateAndTimePickers">
+        <item name="android:textColor">@color/light_main</item>
+    </style>
+
+    <style name="formBackground">
+        <item name="android:background">@drawable/task_form_background</item>
+    </style>
+
+    <style name="Light_notification">
+        <item name="android:background">@color/light_main</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="Light_TaskEditTextView">
         <item name="android:textColor">@color/light_secondary</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:background">@drawable/form_item_light</item>
     </style>
 
     <style name="Light_EditText">
         <item name="android:textColor">@color/light_secondary</item>
-        <item name="background">@drawable/form_item_light</item>
+        <item name="android:background">@drawable/form_item_light</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColorHint">@color/light_secondary</item>
     </style>
