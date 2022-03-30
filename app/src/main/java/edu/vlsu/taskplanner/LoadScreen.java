@@ -3,9 +3,11 @@ package edu.vlsu.taskplanner;
 import android.content.Intent;
 import android.database.Cursor;
 import android.icu.util.Calendar;
+import android.icu.util.GregorianCalendar;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.sql.Date;
 
@@ -16,11 +18,22 @@ public class LoadScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.Light_MainScreen);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.load_screen);
         Task.dbWorker = new TasksDBWorker(this);
 
+        Task.dbWorker.clearTable("tasks");
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
         loadDataFromDataBase();
+
+        Task.add(new Task("name", "desc", new GregorianCalendar(2020, 2, 1, 10, 20), this, false, null));
+        Task.add(new Task("name", "desc", new GregorianCalendar(2020, 1, 1, 10, 20), this, false, null));
+        Task.add(new Task("name", "desc", new GregorianCalendar(2020, 4, 1, 10, 20), this, false, null));
+        Task.add(new Task("name", "desc", new GregorianCalendar(2020, 1, 10, 10, 20), this, false, null));
+        Task.add(new Task("name", "desc", new GregorianCalendar(2020, 2, 1, 10, 21), this, false, null));
 
         startActivity(new Intent(LoadScreen.this, MainScreen.class));
     }

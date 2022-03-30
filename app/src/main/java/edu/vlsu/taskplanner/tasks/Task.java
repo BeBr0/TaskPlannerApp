@@ -31,7 +31,7 @@ public class Task implements Cloneable{
         taskList.add(task);
     }
 
-    public static void addTask(Task task){
+    public static void add(Task task){
         taskList.add(task);
 
         if (task.endTime == null)
@@ -44,7 +44,7 @@ public class Task implements Cloneable{
                     task.startTime.getTime().getTime() + ", " + task.endTime.getTime().getTime() + ");");
     }
 
-    public static void removeTask(Task task){
+    public static void remove(Task task){
         taskList.remove(task);
 
         dbWorker.getWritableDatabase().execSQL("DELETE FROM tasks WHERE id = " + task.id);
@@ -61,6 +61,27 @@ public class Task implements Cloneable{
             contentValues.put(TasksDBWorker.END_DATE_COLUMN, task.endTime.getTime().getTime());
 
         dbWorker.getWritableDatabase().update("tasks", contentValues, "id = " + task.id, new String[]{});
+    }
+
+    public static void sort(TaskViewAdapter taskViewAdapter){
+        List<Task> sorted = new ArrayList<>();
+
+        for (int i = 0; i < taskList.size(); i++){
+            long minTime = -1;
+            Task minTimeTask = null;
+            for (int j = 0; j < taskList.size(); j++){
+                if ((taskList.get(j).startTime.getTime().getTime() <= minTime || minTime == -1) && !sorted.contains(taskList.get(j))){
+                    minTime = taskList.get(j).startTime.getTime().getTime();
+                    minTimeTask = taskList.get(j);
+                }
+            }
+
+            sorted.add(minTimeTask);
+            taskViewAdapter.notifyItemMoved(taskList.indexOf(minTimeTask), sorted.size() - 1);
+        }
+
+        taskList.clear();
+        taskList.addAll(sorted);
     }
 
     private final int id;

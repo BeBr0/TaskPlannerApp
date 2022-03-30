@@ -1,6 +1,7 @@
 package edu.vlsu.taskplanner;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -16,7 +17,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import org.w3c.dom.Text;
+
+import edu.vlsu.taskplanner.settings.Theme;
 import edu.vlsu.taskplanner.tasks.Task;
 
 public class EditTaskScreen extends AppCompatActivity {
@@ -24,9 +29,22 @@ public class EditTaskScreen extends AppCompatActivity {
     private Task task;
 
     @Override
+    public Resources.Theme getTheme(){
+        Resources.Theme theme = super.getTheme();
+        if (Settings.currentTheme == Theme.LIGHT)
+            theme.applyStyle(R.style.Light_EditTaskScreen, true);
+        else if (Settings.currentTheme == Theme.DARK){
+            theme.applyStyle(R.style.Dark_EditTaskScreen, true);
+        }
+        return theme;
+    }
+
+    @Override
     protected void onCreate(Bundle savedScreenInstance) {
         super.onCreate(savedScreenInstance);
         setContentView(R.layout.edit_task_screen);
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
         int index = getIntent().getIntExtra("task", -1);
 
@@ -73,7 +91,9 @@ public class EditTaskScreen extends AppCompatActivity {
     }
 
     private void update(){
-        ((TextView) findViewById(R.id.form_title)).setText(task.getDisplayName());
+        TextView textView = (TextView) findViewById(R.id.form_title);
+        textView.setText(task.getDisplayName());
+
         ((TextView) findViewById(R.id.form_description)).setText(task.getDescription());
         String startTime = task.formStartDateString();
         ((TextView) findViewById(R.id.form_start_date)).setText(startTime);

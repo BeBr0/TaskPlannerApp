@@ -16,16 +16,24 @@
         <entry key="..\:/Users/Homeless/StudioProjects/TaskPlannerVLSU/app/src/main/res/layout/task_item.xml" value="0.2115036231884058" />
         <entry key="..\:/Users/denis/AndroidStudioProjects/TaskPlanner/app/src/main/res/layout/activity_main.xml" value="0.259375" />
         <entry key="app/src/main/res/drawable/backgrond.xml" value="0.3575" />
+        <entry key="app/src/main/res/drawable/button_dark.xml" value="0.2605" />
+        <entry key="app/src/main/res/drawable/button_light.xml" value="0.2605" />
         <entry key="app/src/main/res/drawable/calendar_background.xml" value="0.2705" />
+        <entry key="app/src/main/res/drawable/file.xml" value="0.241" />
+        <entry key="app/src/main/res/drawable/form_item_dark.xml" value="0.2605" />
+        <entry key="app/src/main/res/drawable/form_item_light.xml" value="0.2605" />
         <entry key="app/src/main/res/drawable/rectangle.xml" value="0.3575" />
+        <entry key="app/src/main/res/drawable/task_form_background.xml" value="0.206" />
         <entry key="app/src/main/res/layout/activity_load_screen.xml" value="0.24909420289855072" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35625" />
-        <entry key="app/src/main/res/layout/edit_task_screen.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/edit_task_screen.xml" value="0.33" />
         <entry key="app/src/main/res/layout/load_screen.xml" value="0.22327898550724637" />
-        <entry key="app/src/main/res/layout/main_screen.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/main_screen.xml" value="0.25" />
         <entry key="app/src/main/res/layout/popup_date_picker.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/popup_time_picker.xml" value="0.33" />
         <entry key="app/src/main/res/layout/task_item.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/toolbar.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.35625" />
       </map>
     </option>
   </component>

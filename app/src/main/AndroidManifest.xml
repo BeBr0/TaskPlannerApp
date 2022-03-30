@@ -10,11 +10,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.TaskPlanner">
+        android:supportsRtl="true">
         <activity
             android:name=".LoadScreen"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Light_MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,8 +22,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainScreen"/>
-        <activity android:name=".EditTaskScreen" />
+        <activity android:name=".MainScreen" android:theme="@style/Light_MainScreen"/>
+        <activity android:name=".EditTaskScreen" android:theme="@style/Light_EditText"/>
 
         <receiver android:name=".alarm.myBroadcastReceiver"/>
     </application>
