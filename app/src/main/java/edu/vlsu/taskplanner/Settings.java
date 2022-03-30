@@ -1,7 +1,7 @@
 package edu.vlsu.taskplanner;
 
-import android.content.res.Resources;
+import edu.vlsu.taskplanner.settings.Theme;
 
 public class Settings {
-    public static final int currentTheme = R.style.Theme_Base_Light;
+    public static final Theme currentTheme = Theme.DARK;
 }

@@ -14,7 +14,7 @@
         <activity
             android:name=".LoadScreen"
             android:exported="true"
-            android:theme="@style/Theme_Base_Light">
+            android:theme="@style/Light_MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,8 +22,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainScreen" android:theme="@style/Theme_Base_Light"/>
-        <activity android:name=".EditTaskScreen" android:theme="@style/Theme_Base_Light"/>
+        <activity android:name=".MainScreen" android:theme="@style/Light_MainScreen"/>
+        <activity android:name=".EditTaskScreen" android:theme="@style/Light_EditText"/>
 
         <receiver android:name=".alarm.myBroadcastReceiver"/>
     </application>

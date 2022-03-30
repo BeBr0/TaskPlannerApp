@@ -39,10 +39,10 @@
             app:layout_constraintTop_toBottomOf="@+id/time" />
 
         <View
-            style="@style/Theme_separate_line_light"
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="2dp"
+            android:background="@color/dark_secondary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date" />
 </androidx.constraintlayout.widget.ConstraintLayout>

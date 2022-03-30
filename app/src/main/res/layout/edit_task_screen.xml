@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Toolbar android:layout_width="match_parent"
+    <Toolbar
         android:id="@+id/tb"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,9 +22,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:layout_marginRight="50dp"
                 android:background="#00FFFFFF"
                 android:fontFamily="sans-serif"
-                android:layout_marginRight="50dp"
                 android:text="@string/task"
                 android:textSize="40sp"
                 android:textStyle="bold"
@@ -51,6 +52,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:backgroundTintMode="multiply"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb">
@@ -59,9 +61,10 @@
             android:id="@+id/form_title"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@drawable/rectangle"
             android:hint="@string/task_title"
             android:textAlignment="center"
+            android:textAppearance="@style/Dark_EditText"
+            android:textIsSelectable="true"
             app:flow_verticalAlign="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,9 +74,10 @@
             android:id="@+id/form_description"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@drawable/rectangle"
             android:hint="@string/task_description"
+            android:maxLines="1"
             android:textAlignment="center"
+            android:textIsSelectable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/form_title" />
@@ -82,7 +86,6 @@
             android:id="@+id/form_start_date"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@drawable/rectangle"
             android:gravity="center"
             android:text="@string/start_time"
             android:textAlignment="center"
@@ -94,15 +97,14 @@
             android:id="@+id/form_end_date"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@drawable/rectangle"
             android:gravity="center"
             android:text="@string/end_time"
             app:layout_constraintTop_toBottomOf="@+id/form_start_date" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/form_end_date">
 
@@ -116,10 +118,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                style="@style/Light_notification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
                 android:text="@string/notification"
-                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/notification_check"
@@ -129,23 +133,25 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel_task"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
         android:text="@string/cancel"
         android:textSize="20sp"
-        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@+id/task_data"
         app:layout_constraintTop_toBottomOf="@+id/task_data" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submit_task"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
         android:text="@string/submit_task"
         android:textSize="20sp"
-        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/task_data"
         app:layout_constraintTop_toBottomOf="@+id/task_data" />
 

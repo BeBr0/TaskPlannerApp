@@ -19,6 +19,9 @@ import android.widget.TimePicker;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import org.w3c.dom.Text;
+
+import edu.vlsu.taskplanner.settings.Theme;
 import edu.vlsu.taskplanner.tasks.Task;
 
 public class EditTaskScreen extends AppCompatActivity {
@@ -28,7 +31,11 @@ public class EditTaskScreen extends AppCompatActivity {
     @Override
     public Resources.Theme getTheme(){
         Resources.Theme theme = super.getTheme();
-        theme.applyStyle(Settings.currentTheme, true);
+        if (Settings.currentTheme == Theme.LIGHT)
+            theme.applyStyle(R.style.Light_EditTaskScreen, true);
+        else if (Settings.currentTheme == Theme.DARK){
+            theme.applyStyle(R.style.Dark_EditTaskScreen, true);
+        }
         return theme;
     }
 
@@ -84,7 +91,9 @@ public class EditTaskScreen extends AppCompatActivity {
     }
 
     private void update(){
-        ((TextView) findViewById(R.id.form_title)).setText(task.getDisplayName());
+        TextView textView = (TextView) findViewById(R.id.form_title);
+        textView.setText(task.getDisplayName());
+
         ((TextView) findViewById(R.id.form_description)).setText(task.getDescription());
         String startTime = task.formStartDateString();
         ((TextView) findViewById(R.id.form_start_date)).setText(startTime);
