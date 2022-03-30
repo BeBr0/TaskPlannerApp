@@ -1,3 +1,47 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <!-- Base application theme. -->
+    <style name="Theme_Base_Dark" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondary</item>
+        <!-- Customize your theme here. -->
 
+        <item name="android:background">@color/dark_main</item>
+        <item name="android:textColor">@color/dark_secondary</item>
+        <item name="android:textColorHint">@color/dark_secondary</item>
+        <item name="android:editTextStyle">@style/Theme_edit_form_dark</item>
+        <item name="android:textViewStyle">@style/Theme_text_form_dark</item>
+        <item name="android:toolbarStyle">@style/Theme_toolBar_dark</item>
+        <item name="checkedTextViewStyle">@style/Theme_toolbar_title_dark</item>
+    </style>
+
+    <style name="Theme_toolBar_dark">
+        <item name="android:background">@color/dark_secondary</item>
+    </style>
+
+    <style name="Theme_toolbar_title_dark">
+        <item name="android:textColor">@color/dark_main</item>
+    </style>
+
+    <style name="Theme_buttonStyle_dark">
+        <item name="android:background">@color/dark_secondary</item>
+        <item name="android:textColor">@color/dark_main</item>
+    </style>
+
+    <style name="Theme_separate_line_dark">
+        <item name="android:background">@color/dark_secondary</item>
+    </style>
+
+    <style name="Theme_text_form_dark">
+        <item name="android:textColor">@color/dark_secondary</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme_edit_form_dark">
+        <item name="android:textColor">@color/dark_secondary</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
