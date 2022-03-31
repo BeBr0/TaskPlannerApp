@@ -3,7 +3,7 @@
     <style name="Light_MainScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:textViewStyle">@style/Light_TaskTextView</item>
         <item name="android:background">@color/light_main</item>
-
+        <item name="imageButtonStyle">@style/Light_ImageButton</item>
         <item name="android:toolbarStyle">@style/Light_Toolbar</item>
         <item name="checkedTextViewStyle">@style/Light_ToolbarTitle</item>
     </style>
@@ -17,6 +17,7 @@
         <item name="editTextStyle">@style/Light_EditText</item>
         <item name="android:background">@color/light_main</item>
         <item name="buttonStyle">@style/Light_Button</item>
+        <item name="imageButtonStyle">@style/Light_ImageButton</item>
         <item name="android:textViewStyle">@style/Light_TaskEditTextView</item>
         <item name="android:timePickerDialogTheme">@style/Light_DateAndTimePickers</item>
         <item name="android:datePickerDialogTheme">@style/Light_DateAndTimePickers</item>
@@ -27,6 +28,10 @@
 
     <style name="Light_DateAndTimePickers">
         <item name="android:textColor">@color/light_main</item>
+    </style>
+
+    <style name="Light_ImageButton">
+        <item name="android:src">@drawable/light_openicon</item>
     </style>
 
     <style name="formBackground">
@@ -71,13 +76,13 @@
     <style name="Dark_MainScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:textViewStyle">@style/Dark_TaskTextView</item>
         <item name="android:background">@color/dark_main</item>
-
+        <item name="imageButtonStyle">@style/Dark_ImageButton</item>
         <item name="android:toolbarStyle">@style/Dark_Toolbar</item>
         <item name="checkedTextViewStyle">@style/Dark_ToolbarTitle</item>
     </style>
 
     <style name="Dark_TaskTextView">
-        <item name="android:textColor">@color/dark_secondary</item>
+        <item name="android:textColor">@color/dark_text</item>
         <item name="android:textSize">25sp</item>
     </style>
 
@@ -85,6 +90,7 @@
         <item name="editTextStyle">@style/Dark_EditText</item>
         <item name="android:background">@color/dark_main</item>
         <item name="buttonStyle">@style/Dark_Button</item>
+        <item name="imageButtonStyle">@style/Dark_ImageButton</item>
         <item name="android:textViewStyle">@style/Dark_TaskEditTextView</item>
         <item name="android:timePickerDialogTheme">@style/Dark_DateAndTimePickers</item>
         <item name="android:datePickerDialogTheme">@style/Dark_DateAndTimePickers</item>
@@ -93,8 +99,12 @@
         <item name="checkedTextViewStyle">@style/Dark_ToolbarTitle</item>
     </style>
 
+    <style name="Dark_ImageButton">
+        <item name="android:src">@drawable/dark_openicon</item>
+    </style>
+
     <style name="Dark_DateAndTimePickers">
-        <item name="android:textColor">@color/dark_main</item>
+        <item name="android:textColor">@color/dark_text</item>
     </style>
 
     <style name="Dark_notification">
@@ -103,21 +113,21 @@
     </style>
 
     <style name="Dark_TaskEditTextView">
-        <item name="android:textColor">@color/dark_secondary</item>
+        <item name="android:textColor">@color/dark_text</item>
         <item name="android:textSize">20sp</item>
         <item name="android:background">@drawable/form_item_dark</item>
     </style>
 
     <style name="Dark_EditText">
-        <item name="android:textColor">@color/dark_secondary</item>
+        <item name="android:textColor">@color/dark_text</item>
         <item name="android:background">@drawable/form_item_dark</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColorHint">@color/dark_secondary</item>
+        <item name="android:textColorHint">@color/dark_text</item>
     </style>
 
     <style name="Dark_Button">
         <item name="android:background">@drawable/button_dark</item>
-        <item name="android:textColor">@color/dark_main</item>
+        <item name="android:textColor">@color/dark_text</item>
     </style>
 
     <!--Toolbar style-->
@@ -127,6 +137,6 @@
     </style>
 
     <style name="Dark_ToolbarTitle">
-        <item name="android:textColor">@color/dark_main</item>
+        <item name="android:textColor">@color/dark_text</item>
     </style>
 </resources>

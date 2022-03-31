@@ -21,14 +21,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_marginRight="50dp"
                 android:background="#00FFFFFF"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/miriadpro"
                 android:text="@string/task"
                 android:textSize="40sp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
@@ -37,7 +36,6 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="5dp"
                 android:background="#00FFFFFF"
-                android:src="@drawable/ic_baseline_dehaze_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -60,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="@string/task_title"
+            android:fontFamily="@font/miriadpro"
             android:textAlignment="center"
             android:textAppearance="@style/Dark_EditText"
             android:textIsSelectable="true"
@@ -73,6 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="@string/task_description"
+            android:fontFamily="@font/miriadpro"
             android:maxLines="1"
             android:textAlignment="center"
             android:textIsSelectable="true"
@@ -85,6 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center"
+            android:fontFamily="@font/miriadpro"
             android:text="@string/start_time"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,6 +95,7 @@
         <TextView
             android:id="@+id/form_end_date"
             android:layout_width="match_parent"
+            android:fontFamily="@font/miriadpro"
             android:layout_height="48dp"
             android:gravity="center"
             android:text="@string/end_time"
@@ -119,6 +121,7 @@
                 style="@style/Light_notification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/miriadpro"
                 android:background="#00FFFFFF"
                 android:text="@string/notification"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -133,10 +136,11 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel_task"
-        android:layout_width="115dp"
-        android:layout_height="50dp"
+        android:layout_width="110dp"
+        android:layout_height="32dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
+        android:fontFamily="@font/miriadpro"
         android:text="@string/cancel"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/task_data"
@@ -144,10 +148,11 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submit_task"
-        android:layout_width="115dp"
-        android:layout_height="50dp"
+        android:layout_width="110dp"
+        android:layout_height="32dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
+        android:fontFamily="@font/miriadpro"
         android:text="@string/submit_task"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/task_data"

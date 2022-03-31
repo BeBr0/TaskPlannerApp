@@ -11,4 +11,5 @@
     <string name="submit_task">Сохранить</string>
     <string name="cancel">Отменить</string>
     <string name="notification">Уведомление</string>
+    <string name="settings_text">Настройки</string>
 </resources>

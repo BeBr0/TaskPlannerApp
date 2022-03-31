@@ -10,4 +10,5 @@
     <string name="cancel">Отменить</string>
     <string name="notification">Напоминание</string>
     <string name="tasks_text">Задачи</string>
+    <string name="settings_text">Настройки</string>
 </resources>
