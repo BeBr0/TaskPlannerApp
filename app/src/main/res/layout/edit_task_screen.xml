@@ -36,7 +36,8 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/ic_launcher_background"
+                android:background="#00FFFFFF"
+                android:src="@drawable/ic_baseline_dehaze_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -132,7 +133,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel_task"
-        android:layout_width="100dp"
+        android:layout_width="115dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
@@ -143,7 +144,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submit_task"
-        android:layout_width="100dp"
+        android:layout_width="115dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
