@@ -19,8 +19,6 @@ import android.widget.TimePicker;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import org.w3c.dom.Text;
-
 import edu.vlsu.taskplanner.settings.Theme;
 import edu.vlsu.taskplanner.tasks.Task;
 
@@ -91,7 +89,7 @@ public class EditTaskScreen extends AppCompatActivity {
     }
 
     private void update(){
-        TextView textView = (TextView) findViewById(R.id.form_title);
+        TextView textView = findViewById(R.id.form_title);
         textView.setText(task.getDisplayName());
 
         ((TextView) findViewById(R.id.form_description)).setText(task.getDescription());
