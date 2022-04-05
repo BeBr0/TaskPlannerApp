@@ -10,4 +10,7 @@
     <string name="cancel">Отменить</string>
     <string name="notification">Напоминание</string>
     <string name="tasks_text">Задачи</string>
+
+    <string name="open">Открыть</string>
+    <string name="close">Закрыть</string>
 </resources>

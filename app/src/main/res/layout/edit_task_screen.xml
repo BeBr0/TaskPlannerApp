@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Toolbar
-        android:id="@+id/tb"
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
+        android:id="@+id/tb"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,10 +21,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_marginRight="50dp"
                 android:background="#00FFFFFF"
                 android:fontFamily="sans-serif"
-                android:text="@string/task"
+                android:layout_marginRight="50dp"
+                android:text="@string/tasks_text"
                 android:textSize="40sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -32,18 +32,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/side_bar_open_btn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:background="#00FFFFFF"
                 android:src="@drawable/ic_baseline_dehaze_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </Toolbar>
-
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/task_data"

@@ -16,8 +16,10 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import edu.vlsu.taskplanner.settings.Theme;
 import edu.vlsu.taskplanner.tasks.Task;
@@ -85,6 +87,23 @@ public class EditTaskScreen extends AppCompatActivity {
 
             Intent intent = new Intent(EditTaskScreen.this, MainScreen.class);
             startActivity(intent);
+        });
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout_main);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        findViewById(R.id.side_bar_open_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Called");
+                if (!drawerLayout.isDrawerOpen(findViewById(R.id.nav)))
+                    drawerLayout.openDrawer(findViewById(R.id.nav));
+                else
+                    drawerLayout.closeDrawer(findViewById(R.id.nav));
+            }
         });
     }
 

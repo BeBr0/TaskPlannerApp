@@ -4,7 +4,7 @@
         <item name="android:textViewStyle">@style/Light_TaskTextView</item>
         <item name="android:background">@color/light_main</item>
 
-        <item name="android:toolbarStyle">@style/Light_Toolbar</item>
+        <item name="toolbarStyle">@style/Light_Toolbar</item>
         <item name="checkedTextViewStyle">@style/Light_ToolbarTitle</item>
     </style>
 
@@ -72,7 +72,7 @@
         <item name="android:textViewStyle">@style/Dark_TaskTextView</item>
         <item name="android:background">@color/dark_main</item>
 
-        <item name="android:toolbarStyle">@style/Dark_Toolbar</item>
+        <item name="toolbarStyle">@style/Dark_Toolbar</item>
         <item name="checkedTextViewStyle">@style/Dark_ToolbarTitle</item>
     </style>
 

@@ -2,11 +2,20 @@ package edu.vlsu.taskplanner;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.navigation.NavigationView;
 
 import edu.vlsu.taskplanner.settings.Theme;
 import edu.vlsu.taskplanner.tasks.Task;
@@ -35,8 +44,25 @@ public class MainScreen extends AppCompatActivity {
         Task.sort((TaskViewAdapter) recyclerView.getAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // EDIT
-
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout_main);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        findViewById(R.id.side_bar_open_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Called");
+                if (!drawerLayout.isDrawerOpen(findViewById(R.id.nav)))
+                    drawerLayout.openDrawer(findViewById(R.id.nav));
+                else
+                    drawerLayout.closeDrawer(findViewById(R.id.nav));
+            }
+        });
     }
+
+
 }
