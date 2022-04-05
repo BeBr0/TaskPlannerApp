@@ -89,7 +89,7 @@ public class EditTaskScreen extends AppCompatActivity {
             startActivity(intent);
         });
 
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout_main);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout_edit_task);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
