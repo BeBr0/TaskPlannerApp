@@ -25,7 +25,7 @@
         <activity android:name=".MainScreen" android:theme="@style/Light_MainScreen"/>
         <activity android:name=".EditTaskScreen" android:theme="@style/Light_EditText"/>
 
-        <receiver android:name=".alarm.myBroadcastReceiver"/>
+        <receiver android:name=".alarm.NotificationReceiver"/>
     </application>
 
 </manifest>

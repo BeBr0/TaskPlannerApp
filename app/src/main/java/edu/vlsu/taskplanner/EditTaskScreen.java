@@ -60,6 +60,7 @@ public class EditTaskScreen extends AppCompatActivity {
         else{
             newTask = Task.taskList.get(index).clone();
             updateScreenTexts();
+            ((CheckBox) findViewById(R.id.notification_check)).setChecked(newTask.isAlarmNeeded());
         }
 
         findViewById(R.id.submit_task).setOnClickListener((View view) -> {

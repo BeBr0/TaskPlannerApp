@@ -2,24 +2,22 @@ package edu.vlsu.taskplanner.tasks;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
 import edu.vlsu.taskplanner.alarm.NotificationHelper;
-import edu.vlsu.taskplanner.alarm.myBroadcastReceiver;
+import edu.vlsu.taskplanner.alarm.NotificationReceiver;
 
 public class Task implements Cloneable{
     static NotificationHelper notificationHelper;
@@ -114,7 +112,7 @@ public class Task implements Cloneable{
         notificationHelper = new NotificationHelper(context);
 
         if (alarmNeeded)
-            startAlarm(context);
+            setAlarm(context);
     }
 
     public Task(int id, String displayName, String description, Calendar startTime, Context context, boolean alarmNeeded, @Nullable Calendar endTime) {
@@ -128,11 +126,12 @@ public class Task implements Cloneable{
         notificationHelper = new NotificationHelper(context);
     }
 
-    private void startAlarm(Context context){
+    private void setAlarm(Context context){
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, myBroadcastReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
+        Intent intent = new Intent(context, NotificationReceiver.class);
+        intent.setData(Uri.parse(displayName + "><" + description));
 
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, startTime.getTimeInMillis(), pendingIntent);
         if (endTime != null)
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, endTime.getTimeInMillis(), pendingIntent);
@@ -140,7 +139,7 @@ public class Task implements Cloneable{
 
     private void cancelAlarm(Context context){
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, myBroadcastReceiver.class);
+        Intent intent = new Intent(context, NotificationReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
 
         alarmManager.cancel(pendingIntent);
@@ -220,6 +219,6 @@ public class Task implements Cloneable{
         if (!alarmNeeded)
             cancelAlarm(context);
         else
-            startAlarm(context);
+            setAlarm(context);
     }
 }

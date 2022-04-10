@@ -23,8 +23,6 @@ public class LoadScreen extends AppCompatActivity {
         setContentView(R.layout.load_screen);
         Task.dbWorker = new TasksDBWorker(this);
 
-        Task.dbWorker.clearTable("tasks");
-
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
         loadDataFromDataBase();
