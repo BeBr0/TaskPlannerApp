@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.text.DateFormat;
@@ -26,22 +27,24 @@ public class Task implements Cloneable{
 
     public static List<Task> taskList = new ArrayList<>();
 
+    public static boolean exists(Task task){
+        for (Task t: taskList){
+            if (t.id == task.id)
+                return true;
+        }
+
+        return false;
+    }
+
     /** Используется только при загрузке приложения! */
     public static void addTaskToList(Task task){
         taskList.add(task);
     }
 
     public static void add(Task task){
-        taskList.add(task);
+        dbWorker.writeTaskToDB(task);
 
-        if (task.endTime == null)
-            dbWorker.getWritableDatabase().execSQL("INSERT INTO tasks VALUES" +
-                    "(" + task.id + ", '" + task.displayName + "', '" + task.description + "', " +
-                    task.startTime.getTime().getTime() + ", " + task.alarmNeeded + ", " + -1 + ");");
-        else
-            dbWorker.getWritableDatabase().execSQL("INSERT INTO tasks VALUES" +
-                    "(" + task.id + ", '" + task.displayName + "', '" + task.description + "', " +
-                    task.startTime.getTime().getTime() + ", " + task.endTime.getTime().getTime() + ");");
+        taskList.add(task);
     }
 
     public static void remove(Task task){
@@ -51,16 +54,14 @@ public class Task implements Cloneable{
     }
 
     public static void update(Task task){
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(TasksDBWorker.NAME_COLUMN, task.displayName);
-        contentValues.put(TasksDBWorker.DESCRIPTION_COLUMN, task.displayName);
-        contentValues.put(TasksDBWorker.START_DATE_COLUMN, task.startTime.getTime().getTime());
-        contentValues.put(TasksDBWorker.ALARM_NEEDED, task.alarmNeeded);
+        if (!exists(task)){
+            add(task);
+            return;
+        }
 
-        if (task.endTime != null)
-            contentValues.put(TasksDBWorker.END_DATE_COLUMN, task.endTime.getTime().getTime());
+        taskList.set(task.id, task);
 
-        dbWorker.getWritableDatabase().update("tasks", contentValues, "id = " + task.id, new String[]{});
+        dbWorker.writeTaskToDB(task);
     }
 
     public static void sort(TaskViewAdapter taskViewAdapter){
@@ -96,6 +97,13 @@ public class Task implements Cloneable{
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("Дата: dd.MM.yyyy, Время: HH:mm", Locale.ENGLISH);
 
+    /** Используется при создании задачи с помощью кнопки*/
+    public Task(){
+        this.id = taskList.size();
+        this.displayName = "";
+        this.description =  "";
+    }
+
     public Task(String displayName, String description, Calendar startTime, Context context, boolean alarmNeeded, @Nullable Calendar endTime) {
         this.id = taskList.size();
         this.displayName = displayName;
@@ -126,7 +134,8 @@ public class Task implements Cloneable{
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, startTime.getTimeInMillis(), pendingIntent);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, endTime.getTimeInMillis(), pendingIntent);
+        if (endTime != null)
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, endTime.getTimeInMillis(), pendingIntent);
     }
 
     private void cancelAlarm(Context context){
@@ -147,6 +156,7 @@ public class Task implements Cloneable{
 
     /* notificationHelper.getChannelNotification() */
 
+    @NonNull
     @Override
     public Task clone(){
         try {
@@ -204,7 +214,12 @@ public class Task implements Cloneable{
         this.endTime = endTime;
     }
 
-    public void setAlarmNeeded(boolean alarmNeeded) {
+    public void setAlarmNeeded(boolean alarmNeeded, Context context) {
         this.alarmNeeded = alarmNeeded;
+
+        if (!alarmNeeded)
+            cancelAlarm(context);
+        else
+            startAlarm(context);
     }
 }

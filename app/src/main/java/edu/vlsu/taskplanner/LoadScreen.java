@@ -29,12 +29,6 @@ public class LoadScreen extends AppCompatActivity {
 
         loadDataFromDataBase();
 
-        Task.add(new Task("name", "desc", new GregorianCalendar(2020, 2, 1, 10, 20), this, false, null));
-        Task.add(new Task("name", "desc", new GregorianCalendar(2020, 1, 1, 10, 20), this, false, null));
-        Task.add(new Task("name", "desc", new GregorianCalendar(2020, 4, 1, 10, 20), this, false, null));
-        Task.add(new Task("name", "desc", new GregorianCalendar(2020, 1, 10, 10, 20), this, false, null));
-        Task.add(new Task("name", "desc", new GregorianCalendar(2020, 2, 1, 10, 21), this, false, null));
-
         startActivity(new Intent(LoadScreen.this, MainScreen.class));
     }
 
@@ -45,7 +39,7 @@ public class LoadScreen extends AppCompatActivity {
             startTime.setTime(new Date(Long.parseLong(cursor.getString(3))));
 
             Task task;
-            if (cursor.isNull(4)) {
+            if (cursor.getString(4).equals("-1")) {
                 task = new Task(
                         Integer.parseInt(cursor.getString(0)),
                         cursor.getString(1),

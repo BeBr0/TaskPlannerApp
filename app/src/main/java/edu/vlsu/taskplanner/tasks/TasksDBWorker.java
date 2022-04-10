@@ -2,6 +2,7 @@ package edu.vlsu.taskplanner.tasks;
 
 import static java.security.AccessController.getContext;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -35,8 +36,8 @@ public class TasksDBWorker extends  SQLiteOpenHelper{
                     NAME_COLUMN + " TEXT," +
                     DESCRIPTION_COLUMN + " TEXT," +
                     START_DATE_COLUMN + " INTEGER," +
-                    ALARM_NEEDED + " TEXT," +
-                    END_DATE_COLUMN + " INTEGER" +
+                    END_DATE_COLUMN + " INTEGER," +
+                    ALARM_NEEDED + " TEXT" +
                     ")");
     }
 
@@ -44,6 +45,34 @@ public class TasksDBWorker extends  SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS tasks");
         onCreate(sqLiteDatabase);
+    }
+
+    public void writeTaskToDB(Task task){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ID_COLUMN, task.getId());
+        contentValues.put(NAME_COLUMN, task.getDisplayName());
+        contentValues.put(DESCRIPTION_COLUMN, task.getDescription());
+        contentValues.put(START_DATE_COLUMN, task.getStartTime().getTime().getTime());
+
+        if (task.getEndTime() != null)
+            contentValues.put(END_DATE_COLUMN, task.getEndTime().getTime().getTime());
+        else
+            contentValues.put(END_DATE_COLUMN, -1);
+
+        contentValues.put(ALARM_NEEDED, task.isAlarmNeeded());
+
+        if (!Task.exists(task))
+            getWritableDatabase().execSQL("INSERT INTO tasks VALUES" + "(" +
+                    contentValues.get(ID_COLUMN) + ", '" +
+                    contentValues.get(NAME_COLUMN) + "', '" +
+                    contentValues.get(DESCRIPTION_COLUMN) + "', " +
+                    contentValues.get(START_DATE_COLUMN) + ", " +
+                    contentValues.get(END_DATE_COLUMN) + ", " +
+                    contentValues.get(ALARM_NEEDED) +
+                    ");");
+
+        else
+            getWritableDatabase().update("tasks", contentValues, "id = " + task.getId(), new String[]{});
     }
 
     public void clearTable(String name){

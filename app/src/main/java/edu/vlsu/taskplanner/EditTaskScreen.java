@@ -26,7 +26,7 @@ import edu.vlsu.taskplanner.tasks.Task;
 
 public class EditTaskScreen extends AppCompatActivity {
 
-    private Task task;
+    private Task newTask;
 
     @Override
     public Resources.Theme getTheme(){
@@ -54,37 +54,26 @@ public class EditTaskScreen extends AppCompatActivity {
         startPickerButton.setOnClickListener(this::onPopUpTimeBtnClicked);
         endPickerButton.setOnClickListener(this::onPopUpTimeBtnClicked);
 
-        final Task initialTask;
-
         if (index == -1){
-            initialTask = null;
-            task = null;
+            newTask = new Task();
         }
         else{
-            task = Task.taskList.get(index);
-            initialTask = task.clone();
-
-            update();
+            newTask = Task.taskList.get(index).clone();
+            updateScreenTexts();
         }
 
         findViewById(R.id.submit_task).setOnClickListener((View view) -> {
-            if (task != null) {
-                task.setDisplayName(((TextView) findViewById(R.id.form_title)).getText().toString());
-                task.setDescription(((TextView) findViewById(R.id.form_description)).getText().toString());
-                task.setAlarmNeeded(((CheckBox)findViewById(R.id.notification_check)).isChecked());
+            newTask.setDisplayName(((TextView) findViewById(R.id.form_title)).getText().toString());
+            newTask.setDescription(((TextView) findViewById(R.id.form_description)).getText().toString());
+            newTask.setAlarmNeeded(((CheckBox) findViewById(R.id.notification_check)).isChecked(), view.getContext());
 
-                Task.taskList.set(index, task);
-
-                Task.update(task);
-            }
+            Task.update(newTask);
 
             Intent intent = new Intent(EditTaskScreen.this, MainScreen.class);
             startActivity(intent);
         });
 
         findViewById(R.id.cancel_task).setOnClickListener((View view) -> {
-            Task.taskList.set(index, initialTask);
-
             Intent intent = new Intent(EditTaskScreen.this, MainScreen.class);
             startActivity(intent);
         });
@@ -95,29 +84,29 @@ public class EditTaskScreen extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        findViewById(R.id.side_bar_open_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("Called");
-                if (!drawerLayout.isDrawerOpen(findViewById(R.id.nav)))
-                    drawerLayout.openDrawer(findViewById(R.id.nav));
-                else
-                    drawerLayout.closeDrawer(findViewById(R.id.nav));
-            }
+        findViewById(R.id.side_bar_open_btn).setOnClickListener(view -> {
+            System.out.println("Called");
+            if (!drawerLayout.isDrawerOpen(findViewById(R.id.nav)))
+                drawerLayout.openDrawer(findViewById(R.id.nav));
+            else
+                drawerLayout.closeDrawer(findViewById(R.id.nav));
         });
     }
 
-    private void update(){
-        TextView textView = findViewById(R.id.form_title);
-        textView.setText(task.getDisplayName());
+    private void updateScreenTexts(){
+        if (Task.exists(newTask)) {
+            ((TextView) findViewById(R.id.form_title)).setText(newTask.getDisplayName());
+            ((TextView) findViewById(R.id.form_description)).setText(newTask.getDescription());
+        }
 
-        ((TextView) findViewById(R.id.form_description)).setText(task.getDescription());
-        String startTime = task.formStartDateString();
+        String startTime = newTask.formStartDateString();
         ((TextView) findViewById(R.id.form_start_date)).setText(startTime);
 
-        if (task.getEndTime() != null) {
-            String endTime = task.formEndDateString();
-            ((TextView) findViewById(R.id.form_end_date)).setText(endTime);
+        if (newTask.getEndTime() != null) {
+            if (newTask.getEndTime().getTime().getTime() != -1) {
+                String endTime = newTask.formEndDateString();
+                ((TextView) findViewById(R.id.form_end_date)).setText(endTime);
+            }
         }
     }
 
@@ -139,7 +128,6 @@ public class EditTaskScreen extends AppCompatActivity {
         submit.setOnClickListener((View v) -> {
             popupDatePicker.dismiss();
             DatePicker datePicker = popUpDatePickerView.findViewById(R.id.date_picker);
-            int index = getIntent().getIntExtra("task", -1);
 
             Calendar calendar = Calendar.getInstance();
             calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
@@ -158,11 +146,11 @@ public class EditTaskScreen extends AppCompatActivity {
                         calendar.get(Calendar.DAY_OF_MONTH), timePicker.getHour(), timePicker.getMinute());
 
                 if (view.getId() == R.id.form_start_date)
-                    task.setStartTime(calendar);
+                    newTask.setStartTime(calendar);
                 else
-                    task.setEndTime(calendar);
+                    newTask.setEndTime(calendar);
 
-                update();
+                updateScreenTexts();
 
                 popUpTimePicker.dismiss();
             });

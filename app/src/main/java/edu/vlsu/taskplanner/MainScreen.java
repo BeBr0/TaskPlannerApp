@@ -1,5 +1,6 @@
 package edu.vlsu.taskplanner;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -52,15 +53,16 @@ public class MainScreen extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        findViewById(R.id.side_bar_open_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("Called");
-                if (!drawerLayout.isDrawerOpen(findViewById(R.id.nav)))
-                    drawerLayout.openDrawer(findViewById(R.id.nav));
-                else
-                    drawerLayout.closeDrawer(findViewById(R.id.nav));
-            }
+        findViewById(R.id.side_bar_open_btn).setOnClickListener(view -> {
+            if (!drawerLayout.isDrawerOpen(findViewById(R.id.nav)))
+                drawerLayout.openDrawer(findViewById(R.id.nav));
+            else
+                drawerLayout.closeDrawer(findViewById(R.id.nav));
+        });
+
+        findViewById(R.id.add_task_btn).setOnClickListener(view -> {
+            Intent intent = new Intent(MainScreen.this, EditTaskScreen.class);
+            startActivity(intent);
         });
     }
 
