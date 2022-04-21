@@ -9,10 +9,10 @@
         android:id="@+id/imageButton2"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:background="@drawable/button_plus"
-        android:src="@drawable/ic_plus"
-        android:layout_marginBottom="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="?attr/actionPlusIcon"
+        android:src="?attr/Plus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -48,6 +48,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="5dp"
                 android:background="#00FFFFFF"
+                android:src="?attr/actionOpenIcon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
