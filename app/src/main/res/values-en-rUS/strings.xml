@@ -11,6 +11,7 @@
     <string name="submit_task">Save</string>
     <string name="cancel">Cancel</string>
     <string name="notification">Notification</string>
+    <string name="settings_text">Settings</string>
 
     <string name="open">Open</string>
     <string name="close">Close</string>

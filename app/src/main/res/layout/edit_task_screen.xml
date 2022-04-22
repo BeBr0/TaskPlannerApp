@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.drawerlayout.widget.DrawerLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/drawer_layout_edit_task">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -16,146 +11,147 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#00FFFFFF">
-
-                <CheckedTextView
-                    android:id="@+id/task"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:background="#00FFFFFF"
-                    android:fontFamily="sans-serif"
-                    android:layout_marginRight="50dp"
-                    android:text="@string/tasks_text"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/side_bar_open_btn"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="5dp"
-                    android:background="#00FFFFFF"
-                    android:src="@drawable/ic_baseline_dehaze_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.appcompat.widget.Toolbar>
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/task_data"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:backgroundTintMode="multiply"
+            android:background="#00FFFFFF">
+
+            <CheckedTextView
+                android:id="@+id/task"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginRight="50dp"
+                android:background="#00FFFFFF"
+                android:fontFamily="sans-serif"
+                android:text="@string/task"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/ic_baseline_dehaze_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </Toolbar>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/task_data"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:backgroundTintMode="multiply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb">
+
+        <EditText
+            android:id="@+id/form_title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/task_title"
+            android:textAlignment="center"
+            android:textAppearance="@style/Dark_EditText"
+            android:textIsSelectable="true"
+            app:flow_verticalAlign="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tb">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/form_title"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:hint="@string/task_title"
-                android:textAlignment="center"
-                android:textAppearance="@style/Dark_EditText"
-                android:textIsSelectable="true"
-                app:flow_verticalAlign="center"
-                app:layout_constraintEnd_toEndOf="parent"
+        <EditText
+            android:id="@+id/form_description"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/task_description"
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:textIsSelectable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/form_title" />
+
+        <TextView
+            android:id="@+id/form_start_date"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="@string/start_time"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/form_description" />
+
+        <TextView
+            android:id="@+id/form_end_date"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="@string/end_time"
+            app:layout_constraintTop_toBottomOf="@+id/form_start_date" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/form_end_date">
+
+            <CheckBox
+                android:id="@+id/notification_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/form_description"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:hint="@string/task_description"
-                android:maxLines="1"
-                android:textAlignment="center"
-                android:textIsSelectable="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/form_title" />
-
             <TextView
-                android:id="@+id/form_start_date"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:gravity="center"
-                android:text="@string/start_time"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/form_description" />
-
-            <TextView
-                android:id="@+id/form_end_date"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:gravity="center"
-                android:text="@string/end_time"
-                app:layout_constraintTop_toBottomOf="@+id/form_start_date" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
-                android:layout_width="match_parent"
+                style="@style/Light_notification"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:text="@string/notification"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/form_end_date">
-
-                <CheckBox
-                    android:id="@+id/notification_check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    style="@style/Light_notification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#00FFFFFF"
-                    android:text="@string/notification"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/notification_check"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintStart_toStartOf="@+id/notification_check"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/cancel_task"
-            android:layout_width="115dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/cancel"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/task_data"
-            app:layout_constraintTop_toBottomOf="@+id/task_data" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/submit_task"
-            android:layout_width="115dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/submit_task"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/task_data"
-            app:layout_constraintTop_toBottomOf="@+id/task_data" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancel_task"
+        android:layout_width="115dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/task_data"
+        app:layout_constraintTop_toBottomOf="@+id/task_data" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submit_task"
+        android:layout_width="115dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/submit_task"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/task_data"
+        app:layout_constraintTop_toBottomOf="@+id/task_data" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
