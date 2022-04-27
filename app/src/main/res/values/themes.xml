@@ -80,7 +80,11 @@
         <item name="android:toolbarStyle">@style/Dark_Toolbar</item>
 
         <item name="toolbarStyle">@style/Dark_Toolbar</item>
-        <item name="checkedTextViewStyle">@style/Dark_ToolbarTitle</item>
+        <item name="android:textColor">@color/dark_text</item>
+    </style>
+
+    <style name="Dark_NavigationView">
+        <item name="android:textColor">@color/dark_text</item>
     </style>
 
     <style name="Dark_TaskTextView">

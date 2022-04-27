@@ -78,20 +78,6 @@ public class EditTaskScreen extends AppCompatActivity {
             Intent intent = new Intent(EditTaskScreen.this, MainScreen.class);
             startActivity(intent);
         });
-
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout_edit_task);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
-
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-
-        findViewById(R.id.side_bar_open_btn).setOnClickListener(view -> {
-            System.out.println("Called");
-            if (!drawerLayout.isDrawerOpen(findViewById(R.id.nav)))
-                drawerLayout.openDrawer(findViewById(R.id.nav));
-            else
-                drawerLayout.closeDrawer(findViewById(R.id.nav));
-        });
     }
 
     private void updateScreenTexts(){
