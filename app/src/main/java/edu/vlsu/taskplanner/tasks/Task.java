@@ -22,6 +22,7 @@ import edu.vlsu.taskplanner.alarm.NotificationReceiver;
 public class Task implements Cloneable{
     static NotificationHelper notificationHelper;
     public static TasksDBWorker dbWorker;
+    public static Task chosenTask;
 
     public static List<Task> taskList = new ArrayList<>();
 
@@ -57,9 +58,10 @@ public class Task implements Cloneable{
             return;
         }
 
-        taskList.set(task.id, task);
-
-        dbWorker.writeTaskToDB(task);
+        for (Task t: taskList){
+            if (t.id == task.id)
+                taskList.set(taskList.indexOf(t), task);
+        }
     }
 
     public static void sort(TaskViewAdapter taskViewAdapter){
@@ -96,7 +98,22 @@ public class Task implements Cloneable{
 
     /** Используется при создании задачи с помощью кнопки*/
     public Task(){
-        this.id = taskList.size();
+        int ctr = 0;
+        while (true) {
+            boolean isValid = true;
+            for (Task task : taskList) {
+                if (task.id == ctr) {
+                    isValid = false;
+                    break;
+                }
+            }
+
+            if (isValid)
+                break;
+            else
+                ctr++;
+        }
+        this.id = ctr;
         this.displayName = "";
         this.description =  "";
     }

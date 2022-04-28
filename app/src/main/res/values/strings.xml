@@ -14,6 +14,13 @@
     <string name="open">Открыть</string>
     <string name="close">Закрыть</string>
     <string name="settings_text">Настройки</string>
+    <string name="hours">ч.</string>
+    <string name="minutes">м.</string>
+    <string name="edit">Изменить</string>
+    <string name="remove">Удалить</string>
+    <string name="mark_done">Выполнено</string>
+
+    <string name="error_title_missing">Не указано название задачи!</string>
 
     <string name="time_left">Осталось </string>
 </resources>

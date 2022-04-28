@@ -5,13 +5,17 @@
         <item name="android:toolbarStyle">@style/Light_Toolbar</item>
         <item name="checkedTextViewStyle">@style/Light_ToolbarTitle</item>
         <item name="cardViewStyle">@style/Light_cardView</item>
-        <item name="android:textColor">@color/light_main</item>
+        <item name="android:textColor">@color/light_secondary</item>
+        <item name="android:textViewStyle">@style/Light_Main_TextView</item>
+    </style>
 
-        <item name="android:actionModeBackground">@color/light_secondary</item>
+    <style name="Light_Main_TextView">
+        <item name="android:textColor">@color/light_secondary</item>
     </style>
     
     <style name="Light_cardView" parent="CardView">
         <item name="cardBackgroundColor">@color/light_secondary</item>
+        <item name="android:textColor">@color/light_main</item>
     </style>
 
     <style name="Light_EditTaskScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -82,8 +86,6 @@
         <item name="toolbarStyle">@style/Dark_Toolbar</item>
         <item name="android:textColor">@color/dark_text</item>
         <item name="cardViewStyle">@style/Dark_cardView</item>
-        <item name="android:itemBackground">@color/dark_secondary</item>
-
     </style>
 
     <style name="Dark_cardView">

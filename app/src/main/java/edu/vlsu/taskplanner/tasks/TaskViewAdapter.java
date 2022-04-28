@@ -8,6 +8,7 @@ import android.view.ContextMenu;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -53,8 +54,9 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
         @Override
         public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
             Context context = view.getContext();
-            contextMenu.add(Menu.NONE, R.id.edit_item, Menu.NONE, context.getString(R.string.app_name));
-            contextMenu.add(Menu.NONE, R.id.edit_item, Menu.NONE, context.getString(R.string.app_name));
+            contextMenu.add(Menu.NONE, R.id.edit_item, Menu.NONE, context.getString(R.string.edit));
+            contextMenu.add(Menu.NONE, R.id.delete_item, Menu.NONE, context.getString(R.string.remove));
+            contextMenu.add(Menu.NONE, R.id.done_item, Menu.NONE, context.getString(R.string.mark_done));
         }
     }
 
@@ -78,10 +80,9 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
 
         Button button = holder.taskOpenButton;
         button.setOnLongClickListener((View btn) -> {
-//            Intent intent = new Intent(holder.datetime.getContext(), EditTaskScreen.class);
-//            intent.putExtra("task", Task.taskList.indexOf(task));
-//            holder.taskOpenButton.getContext().startActivity(intent);
-            setPosition(holder.getPosition());
+            Task.chosenTask = task;
+            setPosition(position);
+
             return false;
         });
 

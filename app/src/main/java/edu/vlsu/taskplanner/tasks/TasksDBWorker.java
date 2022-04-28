@@ -43,7 +43,11 @@ public class TasksDBWorker extends  SQLiteOpenHelper{
         contentValues.put(ID_COLUMN, task.getId());
         contentValues.put(NAME_COLUMN, task.getDisplayName());
         contentValues.put(DESCRIPTION_COLUMN, task.getDescription());
-        contentValues.put(START_DATE_COLUMN, task.getStartTime().getTime().getTime());
+        if (task.getStartTime() != null) {
+            contentValues.put(START_DATE_COLUMN, task.getStartTime().getTime().getTime());
+        }
+        else
+            contentValues.put(START_DATE_COLUMN, -1);
 
         contentValues.put(ALARM_NEEDED, task.isAlarmNeeded());
 

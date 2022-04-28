@@ -15,11 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import java.util.Date;
 
 import edu.vlsu.taskplanner.settings.Theme;
 import edu.vlsu.taskplanner.tasks.Task;
@@ -62,8 +65,19 @@ public class EditTaskScreen extends AppCompatActivity {
         }
 
         findViewById(R.id.submit_task).setOnClickListener((View view) -> {
-            newTask.setDisplayName(((TextView) findViewById(R.id.form_title)).getText().toString());
-            newTask.setDescription(((TextView) findViewById(R.id.form_description)).getText().toString());
+            TextView title = (TextView) findViewById(R.id.form_title);
+            TextView description = (TextView) findViewById(R.id.form_description);
+            if (title.getText().toString().equals("")){
+                Toast.makeText(title.getContext(), getString(R.string.error_title_missing), Toast.LENGTH_LONG).show();
+                return;
+            }
+            if (newTask.getStartTime() == null){
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(new Date(-1));
+                newTask.setStartTime(calendar);
+            }
+            newTask.setDisplayName(title.getText().toString());
+            newTask.setDescription(description.getText().toString());
             newTask.setAlarmNeeded(((CheckBox) findViewById(R.id.notification_check)).isChecked(), view.getContext());
 
             Task.update(newTask);
@@ -84,8 +98,10 @@ public class EditTaskScreen extends AppCompatActivity {
             ((TextView) findViewById(R.id.form_description)).setText(newTask.getDescription());
         }
 
-        String startTime = newTask.formStartDateString();
-        ((TextView) findViewById(R.id.form_start_date)).setText(startTime);
+        if (newTask.getStartTime().getTime().getTime() != -1) {
+            String startTime = newTask.formStartDateString();
+            ((TextView) findViewById(R.id.form_start_date)).setText(startTime);
+        }
     }
 
     private void onPopUpTimeBtnClicked(View view) {

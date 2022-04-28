@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,8 @@ import edu.vlsu.taskplanner.tasks.TaskViewAdapter;
 
 public class MainScreen extends AppCompatActivity {
 
+    private RecyclerView recyclerView;
+
     @Override
     public Resources.Theme getTheme(){
         Resources.Theme theme = super.getTheme();
@@ -42,7 +45,7 @@ public class MainScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
         TaskViewAdapter adapter= new TaskViewAdapter();
 
         GridLayoutManager layoutManager=new GridLayoutManager(this,2);
@@ -71,5 +74,24 @@ public class MainScreen extends AppCompatActivity {
             Intent intent = new Intent(MainScreen.this, EditTaskScreen.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item){
+        Task task = Task.chosenTask;
+        if (item.getItemId() == R.id.edit_item){
+            Intent intent = new Intent(MainScreen.this, EditTaskScreen.class);
+            intent.putExtra("task", Task.taskList.indexOf(task));
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.done_item){
+
+        }
+        else if (item.getItemId() == R.id.delete_item){
+            Task.remove(task);
+            recyclerView.removeView(item.getActionView());
+            recyclerView.getAdapter().notifyItemRemoved(item.getGroupId());
+        }
+        return true;
     }
 }
