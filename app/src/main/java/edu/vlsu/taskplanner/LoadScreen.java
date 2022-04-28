@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import java.sql.Date;
 
 import edu.vlsu.taskplanner.tasks.Task;
+import edu.vlsu.taskplanner.tasks.TaskGroup;
 import edu.vlsu.taskplanner.tasks.TasksDBWorker;
 
 public class LoadScreen extends AppCompatActivity {
@@ -43,7 +44,8 @@ public class LoadScreen extends AppCompatActivity {
                     cursor.getString(2),
                     startTime,
                     this,
-                    Boolean.parseBoolean(cursor.getString(4))
+                    Boolean.parseBoolean(cursor.getString(4)),
+                    TaskGroup.valueOf(cursor.getString(5))
             );
 
             Task.addTaskToList(task);

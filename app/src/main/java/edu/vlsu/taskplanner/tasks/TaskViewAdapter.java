@@ -104,6 +104,9 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
 
         TextView datetime = holder.datetime;
         datetime.setText(getFormattedDate(task.getStartTime().getTime().getTime()));
+
+        String groupName = "#" + task.getTaskGroup().name();
+        holder.group.setText(groupName);
     }
 
     private String getTimeLeft(long time){

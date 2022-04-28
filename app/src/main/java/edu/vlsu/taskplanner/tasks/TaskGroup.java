@@ -1,29 +1,27 @@
 package edu.vlsu.taskplanner.tasks;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.StringRes;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskGroup {
+import edu.vlsu.taskplanner.R;
 
-    private String name;
-    private String description;
+public enum TaskGroup {
+    EDUCATION(R.string.group_education),
+    JOB(R.string.group_job),
+    HOME(R.string.group_home),
+    OTHER(R.string.group_other);
 
-    private final List<Task> contentTask = new ArrayList<>();
+    private @StringRes
+    int name;
 
-    public TaskGroup(String name, String description) {
+    TaskGroup(@StringRes int name) {
         this.name = name;
-        this.description = description;
     }
 
-    public String getName() {
+    public int getName() {
         return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public List<Task> getContentTask() {
-        return contentTask;
     }
 }

@@ -26,9 +26,14 @@
         <item name="android:textViewStyle">@style/Light_TaskEditTextView</item>
         <item name="android:timePickerDialogTheme">@style/Light_DateAndTimePickers</item>
         <item name="android:datePickerDialogTheme">@style/Light_DateAndTimePickers</item>
+        <item name="android:spinnerItemStyle">@style/Light_dropdown</item>
 
         <item name="android:toolbarStyle">@style/Light_Toolbar</item>
         <item name="checkedTextViewStyle">@style/Light_ToolbarTitle</item>
+    </style>
+
+    <style name="Light_dropdown">
+        <item name="android:textColor">@color/light_secondary</item>
     </style>
 
     <style name="Light_DateAndTimePickers">

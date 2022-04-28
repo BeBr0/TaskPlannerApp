@@ -8,24 +8,25 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import java.util.Date;
 
 import edu.vlsu.taskplanner.settings.Theme;
 import edu.vlsu.taskplanner.tasks.Task;
+import edu.vlsu.taskplanner.tasks.TaskGroup;
 
 public class EditTaskScreen extends AppCompatActivity {
 
@@ -49,6 +50,16 @@ public class EditTaskScreen extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
+        String[] spinnerItems = new String[TaskGroup.values().length];
+        for (int i = 0; i < TaskGroup.values().length; i++){
+            spinnerItems[i] = getString(TaskGroup.values()[i].getName());
+            System.out.println(spinnerItems[i]);
+        }
+        Spinner spinner = findViewById(R.id.spinner);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, spinnerItems);
+        spinner.setAdapter(adapter);
+
         int index = getIntent().getIntExtra("task", -1);
 
         TextView startPickerButton = findViewById(R.id.form_start_date);
@@ -65,8 +76,8 @@ public class EditTaskScreen extends AppCompatActivity {
         }
 
         findViewById(R.id.submit_task).setOnClickListener((View view) -> {
-            TextView title = (TextView) findViewById(R.id.form_title);
-            TextView description = (TextView) findViewById(R.id.form_description);
+            TextView title = findViewById(R.id.form_title);
+            TextView description = findViewById(R.id.form_description);
             for (Task task: Task.taskList){
                 if (task.getDisplayName().equals(title.getText().toString()) && newTask.getId() != task.getId()){
                     Toast.makeText(title.getContext(), getString(R.string.error_title_exists), Toast.LENGTH_LONG).show();

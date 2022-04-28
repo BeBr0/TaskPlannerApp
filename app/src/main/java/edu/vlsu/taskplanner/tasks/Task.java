@@ -9,9 +9,7 @@ import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +25,7 @@ public class Task implements Cloneable{
     public static Task chosenTask;
 
     public static List<Task> taskList = new ArrayList<>();
+    List<TaskGroup> taskGroups = new ArrayList<>();
 
     public static boolean exists(Task task){
         for (Task t: taskList){
@@ -106,6 +105,8 @@ public class Task implements Cloneable{
 
     private Calendar startTime;
 
+    private TaskGroup taskGroup;
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("Дата: dd.MM.yyyy, Время: HH:mm", Locale.ENGLISH);
 
     /** Используется при создании задачи с помощью кнопки*/
@@ -130,12 +131,13 @@ public class Task implements Cloneable{
         this.description =  "";
     }
 
-    public Task(int id, String displayName, String description, Calendar startTime, Context context, boolean alarmNeeded) {
+    public Task(int id, String displayName, String description, Calendar startTime, Context context, boolean alarmNeeded, TaskGroup taskGroup) {
         this.id = id;
         this.displayName = displayName;
         this.description = description;
         this.startTime = startTime;
         this.alarmNeeded = alarmNeeded;
+        this.taskGroup = taskGroup;
 
         notificationHelper = new NotificationHelper(context);
     }
@@ -164,7 +166,7 @@ public class Task implements Cloneable{
     }
 
     public void markAsDone(Context context){
-        Task.taskList.remove(this);
+        Task.remove(this);
         Toast.makeText(context, context.getString(R.string.mark_done), Toast.LENGTH_LONG).show();
     }
 
@@ -181,10 +183,6 @@ public class Task implements Cloneable{
     }
 
             /* Getter & Setter */
-
-    public String getMonthAndDayString(){
-        return startTime.get(Calendar.DAY_OF_MONTH) + " " + new DateFormatSymbols().getMonths()[startTime.get(Calendar.MONTH)];
-    }
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
@@ -225,5 +223,9 @@ public class Task implements Cloneable{
             cancelAlarm(context);
         else
             setAlarm(context);
+    }
+
+    public TaskGroup getTaskGroup() {
+        return taskGroup;
     }
 }

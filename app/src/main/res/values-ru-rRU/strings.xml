@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Task Planner</string>
-    <string name="tasks_text">Tasks</string>
+    <string name="tasks_text">Задачи</string>
     <string name="no_tasks_text">Задачи отсутсвуют</string>
     <string name="task">Задача</string>
     <string name="task_title">Название</string>
     <string name="task_description">Описание</string>
     <string name="start_time">Дата и время начала</string>
-    <string name="end_time">Время окончания</string>
     <string name="submit_task">Сохранить</string>
     <string name="cancel">Отменить</string>
     <string name="notification">Уведомление</string>
@@ -26,4 +24,8 @@
     <string name="error_title_exists">Задача с таким именем уже существует!</string>
 
     <string name="time_left">Осталось: </string>
+    <string name="group_education">Учёба</string>
+    <string name="group_job">Работа</string>
+    <string name="group_home">Дом</string>
+    <string name="group_other">Другое</string>
 </resources>
