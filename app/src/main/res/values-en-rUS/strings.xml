@@ -22,7 +22,8 @@
     <string name="remove">Remove</string>
     <string name="mark_done">Done</string>
 
-    <string name="error_title_missing">Не указано название задачи!</string>
+    <string name="error_title_missing">Task title missing!</string>
+    <string name="error_title_exists">This title already exists!</string>
 
     <string name="time_left">Time left: </string>
 </resources>

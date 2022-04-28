@@ -54,6 +54,9 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
         @Override
         public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
             Context context = view.getContext();
+
+            Task.chosenTask = Task.getTaskByName(title.getText().toString());
+
             contextMenu.add(Menu.NONE, R.id.edit_item, Menu.NONE, context.getString(R.string.edit));
             contextMenu.add(Menu.NONE, R.id.delete_item, Menu.NONE, context.getString(R.string.remove));
             contextMenu.add(Menu.NONE, R.id.done_item, Menu.NONE, context.getString(R.string.mark_done));

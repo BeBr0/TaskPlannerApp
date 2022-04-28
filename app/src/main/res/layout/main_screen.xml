@@ -58,7 +58,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tb" />
+            app:layout_constraintTop_toBottomOf="@+id/tb"
+            android:clipToPadding="false"/>
 
             <ImageButton
                 android:id="@+id/add_task_btn"

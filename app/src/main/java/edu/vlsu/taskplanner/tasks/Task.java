@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.net.Uri;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import edu.vlsu.taskplanner.R;
 import edu.vlsu.taskplanner.alarm.NotificationHelper;
 import edu.vlsu.taskplanner.alarm.NotificationReceiver;
 
@@ -33,6 +35,16 @@ public class Task implements Cloneable{
         }
 
         return false;
+    }
+
+    public static Task getTaskByName(String title){
+        for (Task task: taskList){
+            if (task.displayName.equals(title)){
+                return task;
+            }
+        }
+
+        return null;
     }
 
     /** Используется ТОЛЬКО при загрузке приложения! */
@@ -149,6 +161,11 @@ public class Task implements Cloneable{
 
     public String formStartDateString(){
         return dateFormat.format(startTime.getTime());
+    }
+
+    public void markAsDone(Context context){
+        Task.taskList.remove(this);
+        Toast.makeText(context, context.getString(R.string.mark_done), Toast.LENGTH_LONG).show();
     }
 
     @NonNull

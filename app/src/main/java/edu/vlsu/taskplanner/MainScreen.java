@@ -79,13 +79,18 @@ public class MainScreen extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item){
         Task task = Task.chosenTask;
+        if (task == null)
+            return false;
+
         if (item.getItemId() == R.id.edit_item){
             Intent intent = new Intent(MainScreen.this, EditTaskScreen.class);
             intent.putExtra("task", Task.taskList.indexOf(task));
             startActivity(intent);
         }
         else if (item.getItemId() == R.id.done_item){
-
+            task.markAsDone(this);
+            recyclerView.removeView(item.getActionView());
+            recyclerView.getAdapter().notifyItemRemoved(item.getGroupId());
         }
         else if (item.getItemId() == R.id.delete_item){
             Task.remove(task);

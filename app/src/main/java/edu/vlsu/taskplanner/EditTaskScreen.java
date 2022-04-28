@@ -67,6 +67,12 @@ public class EditTaskScreen extends AppCompatActivity {
         findViewById(R.id.submit_task).setOnClickListener((View view) -> {
             TextView title = (TextView) findViewById(R.id.form_title);
             TextView description = (TextView) findViewById(R.id.form_description);
+            for (Task task: Task.taskList){
+                if (task.getDisplayName().equals(title.getText().toString()) && newTask.getId() != task.getId()){
+                    Toast.makeText(title.getContext(), getString(R.string.error_title_exists), Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
             if (title.getText().toString().equals("")){
                 Toast.makeText(title.getContext(), getString(R.string.error_title_missing), Toast.LENGTH_LONG).show();
                 return;

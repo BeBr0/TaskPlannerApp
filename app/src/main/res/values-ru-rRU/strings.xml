@@ -23,6 +23,7 @@
     <string name="mark_done">Выполнено</string>
 
     <string name="error_title_missing">Не указано название задачи!</string>
+    <string name="error_title_exists">Задача с таким именем уже существует!</string>
 
     <string name="time_left">Осталось: </string>
 </resources>
