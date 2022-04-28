@@ -49,10 +49,8 @@ public class EditTaskScreen extends AppCompatActivity {
         int index = getIntent().getIntExtra("task", -1);
 
         TextView startPickerButton = findViewById(R.id.form_start_date);
-        TextView endPickerButton = findViewById(R.id.form_end_date);
 
         startPickerButton.setOnClickListener(this::onPopUpTimeBtnClicked);
-        endPickerButton.setOnClickListener(this::onPopUpTimeBtnClicked);
 
         if (index == -1){
             newTask = new Task();
@@ -88,13 +86,6 @@ public class EditTaskScreen extends AppCompatActivity {
 
         String startTime = newTask.formStartDateString();
         ((TextView) findViewById(R.id.form_start_date)).setText(startTime);
-
-        if (newTask.getEndTime() != null) {
-            if (newTask.getEndTime().getTime().getTime() != -1) {
-                String endTime = newTask.formEndDateString();
-                ((TextView) findViewById(R.id.form_end_date)).setText(endTime);
-            }
-        }
     }
 
     private void onPopUpTimeBtnClicked(View view) {
@@ -134,8 +125,6 @@ public class EditTaskScreen extends AppCompatActivity {
 
                 if (view.getId() == R.id.form_start_date)
                     newTask.setStartTime(calendar);
-                else
-                    newTask.setEndTime(calendar);
 
                 updateScreenTexts();
 

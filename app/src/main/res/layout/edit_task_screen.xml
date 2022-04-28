@@ -82,20 +82,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/form_description" />
 
-        <TextView
-            android:id="@+id/form_end_date"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center"
-            android:text="@string/end_time"
-            app:layout_constraintTop_toBottomOf="@+id/form_start_date" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/form_end_date">
+            app:layout_constraintTop_toBottomOf="@+id/form_start_date">
 
             <CheckBox
                 android:id="@+id/notification_check"

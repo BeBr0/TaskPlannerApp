@@ -15,4 +15,6 @@
 
     <string name="open">Открыть</string>
     <string name="close">Закрыть</string>
+
+    <string name="time_left">Осталось: </string>
 </resources>

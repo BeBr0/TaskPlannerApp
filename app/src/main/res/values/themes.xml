@@ -1,16 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 <!--    Light THEME -->
     <style name="Light_MainScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:textViewStyle">@style/Light_TaskTextView</item>
-        <item name="android:background">@color/light_main</item>
         <item name="imageButtonStyle">@style/Light_ImageButton</item>
         <item name="android:toolbarStyle">@style/Light_Toolbar</item>
         <item name="checkedTextViewStyle">@style/Light_ToolbarTitle</item>
-    </style>
+        <item name="cardViewStyle">@style/Light_cardView</item>
+        <item name="android:textColor">@color/light_main</item>
 
-    <style name="Light_TaskTextView">
-        <item name="android:textColor">@color/light_secondary</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:actionModeBackground">@color/light_secondary</item>
+    </style>
+    
+    <style name="Light_cardView" parent="CardView">
+        <item name="cardBackgroundColor">@color/light_secondary</item>
     </style>
 
     <style name="Light_EditTaskScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -73,14 +74,20 @@
 
 
 <!--    DARK THEME-->
-    <style name="Dark_MainScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Dark_MainScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:textViewStyle">@style/Dark_TaskTextView</item>
-        <item name="android:background">@color/dark_main</item>
         <item name="imageButtonStyle">@style/Dark_ImageButton</item>
         <item name="android:toolbarStyle">@style/Dark_Toolbar</item>
 
         <item name="toolbarStyle">@style/Dark_Toolbar</item>
         <item name="android:textColor">@color/dark_text</item>
+        <item name="cardViewStyle">@style/Dark_cardView</item>
+        <item name="android:itemBackground">@color/dark_secondary</item>
+
+    </style>
+
+    <style name="Dark_cardView">
+        <item name="cardBackgroundColor">@color/dark_secondary</item>
     </style>
 
     <style name="Dark_NavigationView">

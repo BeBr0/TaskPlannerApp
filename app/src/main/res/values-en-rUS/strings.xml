@@ -15,4 +15,6 @@
 
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+    <string name="time_left">Time left: </string>
 </resources>

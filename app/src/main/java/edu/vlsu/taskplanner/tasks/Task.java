@@ -34,7 +34,7 @@ public class Task implements Cloneable{
         return false;
     }
 
-    /** Используется только при загрузке приложения! */
+    /** Используется ТОЛЬКО при загрузке приложения! */
     public static void addTaskToList(Task task){
         taskList.add(task);
     }
@@ -91,7 +91,6 @@ public class Task implements Cloneable{
     private boolean alarmNeeded = false;
 
     private Calendar startTime;
-    private Calendar endTime;
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("Дата: dd.MM.yyyy, Время: HH:mm", Locale.ENGLISH);
 
@@ -102,39 +101,25 @@ public class Task implements Cloneable{
         this.description =  "";
     }
 
-    public Task(String displayName, String description, Calendar startTime, Context context, boolean alarmNeeded, @Nullable Calendar endTime) {
-        this.id = taskList.size();
-        this.displayName = displayName;
-        this.description = description;
-        this.startTime = startTime;
-        this.endTime = endTime;
-
-        notificationHelper = new NotificationHelper(context);
-
-        if (alarmNeeded)
-            setAlarm(context);
-    }
-
-    public Task(int id, String displayName, String description, Calendar startTime, Context context, boolean alarmNeeded, @Nullable Calendar endTime) {
+    public Task(int id, String displayName, String description, Calendar startTime, Context context, boolean alarmNeeded) {
         this.id = id;
         this.displayName = displayName;
         this.description = description;
         this.startTime = startTime;
-        this.endTime = endTime;
         this.alarmNeeded = alarmNeeded;
 
         notificationHelper = new NotificationHelper(context);
     }
 
     private void setAlarm(Context context){
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, NotificationReceiver.class);
-        intent.setData(Uri.parse(displayName + "><" + description));
+        if (startTime != null) {
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(context, NotificationReceiver.class);
+            intent.setData(Uri.parse(displayName + "><" + description));
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, startTime.getTimeInMillis(), pendingIntent);
-        if (endTime != null)
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, endTime.getTimeInMillis(), pendingIntent);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, startTime.getTimeInMillis(), pendingIntent);
+        }
     }
 
     private void cancelAlarm(Context context){
@@ -148,12 +133,6 @@ public class Task implements Cloneable{
     public String formStartDateString(){
         return dateFormat.format(startTime.getTime());
     }
-
-    public String formEndDateString(){
-        return dateFormat.format(endTime.getTime());
-    }
-
-    /* notificationHelper.getChannelNotification() */
 
     @NonNull
     @Override
@@ -197,20 +176,12 @@ public class Task implements Cloneable{
         return startTime;
     }
 
-    public Calendar getEndTime() {
-        return endTime;
-    }
-
     public boolean isAlarmNeeded() {
         return alarmNeeded;
     }
 
     public void setStartTime(Calendar startTime) {
         this.startTime = startTime;
-    }
-
-    public void setEndTime(Calendar endTime) {
-        this.endTime = endTime;
     }
 
     public void setAlarmNeeded(boolean alarmNeeded, Context context) {

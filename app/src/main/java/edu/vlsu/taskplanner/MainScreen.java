@@ -3,6 +3,7 @@ package edu.vlsu.taskplanner;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,10 +42,15 @@ public class MainScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
-        RecyclerView recyclerView = findViewById(R.id.tasks_recycler_view);
-        recyclerView.setAdapter(new TaskViewAdapter());
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        TaskViewAdapter adapter= new TaskViewAdapter();
+
+        GridLayoutManager layoutManager=new GridLayoutManager(this,2);
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
         Task.sort((TaskViewAdapter) recyclerView.getAdapter());
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
@@ -65,6 +72,4 @@ public class MainScreen extends AppCompatActivity {
             startActivity(intent);
         });
     }
-
-
 }
