@@ -1,6 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 <!--    Light THEME -->
     <style name="Light_MainScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/light_secondary</item>
+
         <item name="imageButtonStyle">@style/Light_ImageButton</item>
         <item name="android:toolbarStyle">@style/Light_Toolbar</item>
         <item name="checkedTextViewStyle">@style/Light_ToolbarTitle</item>
@@ -19,6 +21,8 @@
     </style>
 
     <style name="Light_EditTaskScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/light_secondary</item>
+
         <item name="editTextStyle">@style/Light_EditText</item>
         <item name="android:background">@color/light_main</item>
         <item name="buttonStyle">@style/Light_Button</item>
