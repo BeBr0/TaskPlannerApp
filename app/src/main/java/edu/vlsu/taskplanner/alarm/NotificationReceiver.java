@@ -15,6 +15,10 @@ public class NotificationReceiver extends BroadcastReceiver {
         NotificationHelper notificationHelper = new NotificationHelper(context);
         String[] data = intent.getDataString().split("><");
 
+        if (data.length == 1){
+            data = new String[]{data[0], ""};
+        }
+
         NotificationCompat.Builder nb = notificationHelper.getChannelNotification(data[0], data[1]);
         notificationHelper.getManager().notify(1, nb.build());
     }

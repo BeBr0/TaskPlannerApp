@@ -17,6 +17,7 @@ public class TasksDBWorker extends  SQLiteOpenHelper{
     static String START_DATE_COLUMN = "startDate";
     static String ALARM_NEEDED = "alarmNeeded";
     static String GROUP_COLUMN = "task_group";
+    static String CREATION_TIME_COLUMN = "create_time";
 
     public TasksDBWorker(@Nullable Context context) {
         super(context, name, null, version);
@@ -30,7 +31,8 @@ public class TasksDBWorker extends  SQLiteOpenHelper{
                     DESCRIPTION_COLUMN + " TEXT," +
                     START_DATE_COLUMN + " INTEGER," +
                     ALARM_NEEDED + " TEXT," +
-                    GROUP_COLUMN + " TEXT" +
+                    GROUP_COLUMN + " TEXT," +
+                    CREATION_TIME_COLUMN + " INTEGER" +
                     ")");
     }
 
@@ -53,6 +55,7 @@ public class TasksDBWorker extends  SQLiteOpenHelper{
 
         contentValues.put(ALARM_NEEDED, task.isAlarmNeeded());
         contentValues.put(GROUP_COLUMN, task.getTaskGroup().systemName);
+        contentValues.put(CREATION_TIME_COLUMN, task.getTimeOfCreation().getTime().getTime());
 
         if (!Task.exists(task))
             getWritableDatabase().execSQL("INSERT INTO tasks VALUES" + "(" +
@@ -61,7 +64,8 @@ public class TasksDBWorker extends  SQLiteOpenHelper{
                     contentValues.get(DESCRIPTION_COLUMN) + "', " +
                     contentValues.get(START_DATE_COLUMN) + ", " +
                     contentValues.get(ALARM_NEEDED) + ", '" +
-                    contentValues.get(GROUP_COLUMN) + "'" +
+                    contentValues.get(GROUP_COLUMN) + "', " +
+                    contentValues.get(CREATION_TIME_COLUMN) +
                     ");");
 
         else

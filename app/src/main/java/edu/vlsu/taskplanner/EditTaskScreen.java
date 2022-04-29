@@ -98,6 +98,8 @@ public class EditTaskScreen extends AppCompatActivity {
 
             newTask.setTaskGroup(TaskGroup.getItemByName(spinner.getSelectedItem().toString()));
 
+            newTask.setTimeOfCreation(Calendar.getInstance());
+
             Task.update(newTask);
 
             Intent intent = new Intent(EditTaskScreen.this, MainScreen.class);

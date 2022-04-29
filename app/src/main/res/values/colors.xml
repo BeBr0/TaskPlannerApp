@@ -7,6 +7,8 @@
     <color name="dark_secondary">#303030</color>
     <color name="dark_text">#b6b9b9</color>
 
-    <color name="left">#33cc33</color>
+    <color name="more_than_75">#99ff99</color>
+    <color name="more_than_50">#00cc00</color>
+    <color name="more_than_25">#ff9900</color>
     <color name="ago">#ff0000</color>
 </resources>

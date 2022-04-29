@@ -109,6 +109,8 @@ public class Task implements Cloneable{
 
     private Calendar startTime;
 
+    private Calendar timeOfCreation;
+
     private TaskGroup taskGroup;
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("Дата: dd.MM.yyyy, Время: HH:mm", Locale.ENGLISH);
@@ -235,5 +237,14 @@ public class Task implements Cloneable{
 
     public void setTaskGroup(TaskGroup taskGroup) {
         this.taskGroup = taskGroup;
+    }
+
+    public void setTimeOfCreation(Calendar timeOfCreation) {
+        this.timeOfCreation = timeOfCreation;
+    }
+
+
+    public Calendar getTimeOfCreation() {
+        return timeOfCreation;
     }
 }

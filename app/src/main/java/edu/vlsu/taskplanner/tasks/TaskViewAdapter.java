@@ -118,10 +118,19 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
                     );
 
             timeLeft.setText(timeText);
-            if (task.getStartTime().getTime().getTime() - Calendar.getInstance().getTime().getTime() >= 0){
-                timeLeft.setTextColor(context.getColor(R.color.left));
+            float timePercentage = 1 - (float)(Calendar.getInstance().getTime().getTime() - task.getTimeOfCreation().getTime().getTime()) / (task.getStartTime().getTime().getTime() - Calendar.getInstance().getTime().getTime() );
+
+            System.out.println(timePercentage);
+            if (timePercentage > 0.75){
+                timeLeft.setTextColor(context.getColor(R.color.more_than_75));
             }
-            else {
+            else if (timePercentage > 0.5){
+                timeLeft.setTextColor(context.getColor(R.color.more_than_50));
+            }
+            else if (timePercentage > 0.25){
+                timeLeft.setTextColor(context.getColor(R.color.more_than_25));
+            }
+            else{
                 timeLeft.setTextColor(context.getColor(R.color.ago));
             }
 
@@ -158,7 +167,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
             result += hours + context.getString(R.string.hours) + " ";
         }
 
-        if (time > 0){
+        if (time > 0 || (time == 0 && result.equals(""))){
             result += time + context.getString(R.string.minutes) + " ";
         }
 
