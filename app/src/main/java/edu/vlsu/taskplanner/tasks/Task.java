@@ -76,7 +76,6 @@ public class Task implements Cloneable{
 
     public static void sort(TaskViewAdapter taskViewAdapter){
         List<Task> sorted = new ArrayList<>();
-        // TODO: soty by group and then time left
         for (TaskGroup taskGroup: TaskGroup.values()) {
 
 
