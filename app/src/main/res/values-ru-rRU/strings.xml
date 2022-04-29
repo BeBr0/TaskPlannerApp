@@ -30,4 +30,5 @@
     <string name="group_other">Другое</string>
     <string name="days">д.</string>
     <string name="ago">тому назад</string>
+    <string name="error_time_missing">Установите время напоминания!</string>
 </resources>

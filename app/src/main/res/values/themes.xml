@@ -1,22 +1,28 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
 <!--    Light THEME -->
     <style name="Light_MainScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="add_task_btn">@style/Light_addTaskBtn</item>
+        <item name="recycler_view_item">@style/Light_cardView</item>
         <item name="android:statusBarColor">@color/light_secondary</item>
+        <item name="android:background">@color/light_main</item>
 
         <item name="imageButtonStyle">@style/Light_ImageButton</item>
         <item name="android:toolbarStyle">@style/Light_Toolbar</item>
         <item name="checkedTextViewStyle">@style/Light_ToolbarTitle</item>
-        <item name="cardViewStyle">@style/Light_cardView</item>
+<!--        <item name="cardViewStyle">@style/Light_cardView</item>-->
         <item name="android:textColor">@color/light_secondary</item>
-        <item name="android:textViewStyle">@style/Light_Main_TextView</item>
+    </style>
+
+    <style name="Light_addTaskBtn">
+        <item name="android:background">@drawable/button_plus_light</item>
     </style>
 
     <style name="Light_Main_TextView">
         <item name="android:textColor">@color/light_secondary</item>
     </style>
-    
+
     <style name="Light_cardView" parent="CardView">
-        <item name="cardBackgroundColor">@color/light_secondary</item>
+        <item name="android:background">@color/light_secondary</item>
         <item name="android:textColor">@color/light_main</item>
     </style>
 
@@ -88,17 +94,26 @@
 
 <!--    DARK THEME-->
     <style name="Dark_MainScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="add_task_btn">@style/Dark_addTaskBtn</item>
+        <item name="recycler_view_item">@style/Dark_cardView</item>
+
         <item name="android:textViewStyle">@style/Dark_TaskTextView</item>
         <item name="imageButtonStyle">@style/Dark_ImageButton</item>
         <item name="android:toolbarStyle">@style/Dark_Toolbar</item>
+        <item name="android:background">@color/dark_main</item>
 
         <item name="toolbarStyle">@style/Dark_Toolbar</item>
         <item name="android:textColor">@color/dark_text</item>
         <item name="cardViewStyle">@style/Dark_cardView</item>
     </style>
 
-    <style name="Dark_cardView">
-        <item name="cardBackgroundColor">@color/dark_secondary</item>
+    <style name="Dark_addTaskBtn">
+        <item name="android:background">@drawable/button_plus_dark</item>
+    </style>
+
+    <style name="Dark_cardView" parent="CardView">
+        <item name="android:background">@color/dark_secondary</item>
+        <item name="android:textColor">@color/dark_text</item>
     </style>
 
     <style name="Dark_NavigationView">

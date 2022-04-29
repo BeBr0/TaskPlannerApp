@@ -22,6 +22,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import org.w3c.dom.Text;
+
 import java.util.Date;
 
 import edu.vlsu.taskplanner.settings.Theme;
@@ -77,14 +79,20 @@ public class EditTaskScreen extends AppCompatActivity {
         findViewById(R.id.submit_task).setOnClickListener((View view) -> {
             TextView title = findViewById(R.id.form_title);
             TextView description = findViewById(R.id.form_description);
+            CheckBox notify = (CheckBox) findViewById(R.id.notification_check);
             for (Task task: Task.taskList){
                 if (task.getDisplayName().equals(title.getText().toString()) && newTask.getId() != task.getId()){
-                    Toast.makeText(title.getContext(), getString(R.string.error_title_exists), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.error_title_exists), Toast.LENGTH_LONG).show();
                     return;
                 }
             }
             if (title.getText().toString().equals("")){
-                Toast.makeText(title.getContext(), getString(R.string.error_title_missing), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.error_title_missing), Toast.LENGTH_LONG).show();
+                return;
+            }
+            System.out.println(startPickerButton.getText().toString());
+            if (startPickerButton.getText().toString().equals("Start time") && notify.isChecked()){
+                Toast.makeText(this, R.string.error_time_missing, Toast.LENGTH_LONG).show();
                 return;
             }
             if (newTask.getStartTime() == null){
@@ -94,7 +102,7 @@ public class EditTaskScreen extends AppCompatActivity {
             }
             newTask.setDisplayName(title.getText().toString());
             newTask.setDescription(description.getText().toString());
-            newTask.setAlarmNeeded(((CheckBox) findViewById(R.id.notification_check)).isChecked(), view.getContext());
+            newTask.setAlarmNeeded(notify.isChecked(), view.getContext());
 
             newTask.setTaskGroup(TaskGroup.getItemByName(spinner.getSelectedItem().toString()));
 

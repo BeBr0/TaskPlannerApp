@@ -3,4 +3,5 @@
     <solid android:color="@android:color/white"/>
     <corners android:radius="12px"/>
     <stroke  android:width="5dp" android:color="@color/dark_secondary"/>
+    <attr android:name="buttonface_picture" android:format="reference"/>
 </shape>

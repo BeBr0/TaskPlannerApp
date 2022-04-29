@@ -62,12 +62,12 @@
 
             <ImageButton
                 android:id="@+id/add_task_btn"
+                style="?attr/add_task_btn"
                 android:clickable="true"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="15dp"
-                android:background="@drawable/button_plus"
                 android:src="@drawable/ic_plus"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
