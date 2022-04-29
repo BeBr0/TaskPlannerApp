@@ -23,9 +23,11 @@
     <string name="error_title_missing">Task title missing!</string>
     <string name="error_title_exists">This title already exists!</string>
 
-    <string name="time_left">Time left: </string>
+    <string name="time_left">left</string>
     <string name="group_education">Education</string>
     <string name="group_job">Job</string>
     <string name="group_home">Home</string>
     <string name="group_other">Other</string>
+    <string name="days">d.</string>
+    <string name="ago">ago</string>
 </resources>

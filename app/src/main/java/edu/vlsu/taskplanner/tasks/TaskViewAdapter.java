@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.telephony.ims.RcsUceAdapter;
 import android.view.ContextMenu;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
 import java.time.chrono.Chronology;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.FormatStyle;
@@ -29,6 +32,7 @@ import java.util.Locale;
 
 import edu.vlsu.taskplanner.EditTaskScreen;
 import edu.vlsu.taskplanner.R;
+import edu.vlsu.taskplanner.settings.Theme;
 
 public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHolder> {
 
@@ -93,27 +97,76 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
         title.setText(task.getDisplayName());
 
         TextView description = holder.description;
-        description.setText(task.getDescription());
+        String descText = task.getDescription();
+        if (descText.length() > 50){
+            String newText = "";
+            for (int i = 0; i <= 50; i++){
+                newText += descText.charAt(i);
+            }
+            descText = newText + "...";
+        }
+        description.setText(descText);
 
-        TextView timeLeft = holder.timeLeft;
-        String timeText;
+        if (task.getStartTime().getTime().getTime() != -1) {
 
-        timeText = context.getString(R.string.time_left) + getTimeLeft(task.getStartTime().getTime().getTime() - Calendar.getInstance().getTime().getTime());
+            TextView timeLeft = holder.timeLeft;
+            String timeText;
 
-        timeLeft.setText(timeText);
+            timeText = getTimeLeft(
+                            task.getStartTime().getTime().getTime(),
+                            Calendar.getInstance().getTime().getTime(), holder.itemView.getContext()
+                    );
 
-        TextView datetime = holder.datetime;
-        datetime.setText(getFormattedDate(task.getStartTime().getTime().getTime()));
+            timeLeft.setText(timeText);
+            if (task.getStartTime().getTime().getTime() - Calendar.getInstance().getTime().getTime() >= 0){
+                timeLeft.setTextColor(context.getColor(R.color.left));
+            }
+            else {
+                timeLeft.setTextColor(context.getColor(R.color.ago));
+            }
 
+            TextView datetime = holder.datetime;
+            datetime.setText(getFormattedDate(task.getStartTime().getTime().getTime()));
+        }
         String groupName = "#" + task.getTaskGroup().name();
         holder.group.setText(groupName);
     }
 
-    private String getTimeLeft(long time){
-        if (time <= 0)
-            return "0";
+    private String getTimeLeft(long start, long end, Context context){
+        long startMinutes = start / 1000 / 60;
+        long endMinutes = end / 1000 / 60;
 
-        return time / 1000 / 3600 +  ":" + (time / 1000 / 60 - (time / 1000 / 3600) * 60);
+        boolean passed = false;
+        long time = startMinutes - endMinutes;
+
+        if (time < 0)
+            passed = true;
+
+        time = Math.abs(time);
+
+        int days = (int) (time / 60 / 24);
+        int hours = (int) (time / 60 - days * 24);
+        time = time - (long) days * 60 * 24 - hours * 60L;
+
+        String result = "";
+
+        if (days > 0){
+            result += days + context.getString(R.string.days) + " ";
+        }
+
+        if (hours > 0){
+            result += hours + context.getString(R.string.hours) + " ";
+        }
+
+        if (time > 0){
+            result += time + context.getString(R.string.minutes) + " ";
+        }
+
+        if (passed)
+            return  result + context.getString(R.string.ago);
+
+        else
+            return result + context.getString(R.string.time_left);
     }
 
     private String getFormattedDate(long time){

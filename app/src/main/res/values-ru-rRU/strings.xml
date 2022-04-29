@@ -23,9 +23,11 @@
     <string name="error_title_missing">Не указано название задачи!</string>
     <string name="error_title_exists">Задача с таким именем уже существует!</string>
 
-    <string name="time_left">Осталось: </string>
+    <string name="time_left">осталось</string>
     <string name="group_education">Учёба</string>
     <string name="group_job">Работа</string>
     <string name="group_home">Дом</string>
     <string name="group_other">Другое</string>
+    <string name="days">д.</string>
+    <string name="ago">тому назад</string>
 </resources>

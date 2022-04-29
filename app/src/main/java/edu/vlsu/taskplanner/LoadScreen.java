@@ -45,7 +45,7 @@ public class LoadScreen extends AppCompatActivity {
                     startTime,
                     this,
                     Boolean.parseBoolean(cursor.getString(4)),
-                    TaskGroup.valueOf(cursor.getString(5))
+                    TaskGroup.getItemByName(cursor.getString(5))
             );
 
             Task.addTaskToList(task);

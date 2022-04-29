@@ -24,4 +24,6 @@
     <string name="group_job">وظيفة</string>
     <string name="group_home">مسكن</string>
     <string name="group_other">آخر</string>
+    <string name="days">d.</string>
+    <string name="ago">منذ</string>
 </resources>

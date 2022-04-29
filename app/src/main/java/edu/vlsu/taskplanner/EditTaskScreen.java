@@ -53,7 +53,6 @@ public class EditTaskScreen extends AppCompatActivity {
         String[] spinnerItems = new String[TaskGroup.values().length];
         for (int i = 0; i < TaskGroup.values().length; i++){
             spinnerItems[i] = getString(TaskGroup.values()[i].getName());
-            System.out.println(spinnerItems[i]);
         }
         Spinner spinner = findViewById(R.id.spinner);
 
@@ -96,6 +95,8 @@ public class EditTaskScreen extends AppCompatActivity {
             newTask.setDisplayName(title.getText().toString());
             newTask.setDescription(description.getText().toString());
             newTask.setAlarmNeeded(((CheckBox) findViewById(R.id.notification_check)).isChecked(), view.getContext());
+
+            newTask.setTaskGroup(TaskGroup.getItemByName(spinner.getSelectedItem().toString()));
 
             Task.update(newTask);
 

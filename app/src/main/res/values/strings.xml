@@ -27,4 +27,6 @@
     <string name="group_job">Работа</string>
     <string name="group_home">Дом</string>
     <string name="group_other">Другое</string>
+    <string name="days">д.</string>
+    <string name="ago">тому назад</string>
 </resources>

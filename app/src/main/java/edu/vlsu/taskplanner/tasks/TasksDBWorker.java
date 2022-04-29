@@ -52,7 +52,7 @@ public class TasksDBWorker extends  SQLiteOpenHelper{
             contentValues.put(START_DATE_COLUMN, -1);
 
         contentValues.put(ALARM_NEEDED, task.isAlarmNeeded());
-        contentValues.put(GROUP_COLUMN, task.getTaskGroup().getName());
+        contentValues.put(GROUP_COLUMN, task.getTaskGroup().systemName);
 
         if (!Task.exists(task))
             getWritableDatabase().execSQL("INSERT INTO tasks VALUES" + "(" +
@@ -60,7 +60,8 @@ public class TasksDBWorker extends  SQLiteOpenHelper{
                     contentValues.get(NAME_COLUMN) + "', '" +
                     contentValues.get(DESCRIPTION_COLUMN) + "', " +
                     contentValues.get(START_DATE_COLUMN) + ", " +
-                    contentValues.get(ALARM_NEEDED) +
+                    contentValues.get(ALARM_NEEDED) + ", '" +
+                    contentValues.get(GROUP_COLUMN) + "'" +
                     ");");
 
         else

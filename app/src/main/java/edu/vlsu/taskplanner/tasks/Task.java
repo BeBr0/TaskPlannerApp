@@ -25,7 +25,6 @@ public class Task implements Cloneable{
     public static Task chosenTask;
 
     public static List<Task> taskList = new ArrayList<>();
-    List<TaskGroup> taskGroups = new ArrayList<>();
 
     public static boolean exists(Task task){
         for (Task t: taskList){
@@ -77,21 +76,27 @@ public class Task implements Cloneable{
 
     public static void sort(TaskViewAdapter taskViewAdapter){
         List<Task> sorted = new ArrayList<>();
+        // TODO: soty by group and then time left
+        for (TaskGroup taskGroup: TaskGroup.values()) {
 
-        for (int i = 0; i < taskList.size(); i++){
-            long minTime = -1;
-            Task minTimeTask = null;
-            for (int j = 0; j < taskList.size(); j++){
-                if ((taskList.get(j).startTime.getTime().getTime() <= minTime || minTime == -1) && !sorted.contains(taskList.get(j))){
-                    minTime = taskList.get(j).startTime.getTime().getTime();
-                    minTimeTask = taskList.get(j);
+
+            for (int i = 0; i < taskList.size(); i++) {
+                if (taskList.get(i).taskGroup == taskGroup) {
+                    long minTime = -2;
+                    Task minTimeTask = null;
+                    for (int j = 0; j < taskList.size(); j++) {
+                        if (taskList.get(i).taskGroup == taskGroup) {
+                            if ((taskList.get(j).startTime.getTime().getTime() <= minTime || minTime == -2) && !sorted.contains(taskList.get(j))) {
+                                minTime = taskList.get(j).startTime.getTime().getTime();
+                                minTimeTask = taskList.get(j);
+                            }
+                        }
+                    }
+                    sorted.add(minTimeTask);
+                    taskViewAdapter.notifyItemMoved(taskList.indexOf(minTimeTask), sorted.size() - 1);
                 }
             }
-
-            sorted.add(minTimeTask);
-            taskViewAdapter.notifyItemMoved(taskList.indexOf(minTimeTask), sorted.size() - 1);
         }
-
         taskList.clear();
         taskList.addAll(sorted);
     }
@@ -227,5 +232,9 @@ public class Task implements Cloneable{
 
     public TaskGroup getTaskGroup() {
         return taskGroup;
+    }
+
+    public void setTaskGroup(TaskGroup taskGroup) {
+        this.taskGroup = taskGroup;
     }
 }

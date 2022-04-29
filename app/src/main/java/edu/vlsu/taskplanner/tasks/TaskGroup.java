@@ -9,19 +9,29 @@ import java.util.List;
 import edu.vlsu.taskplanner.R;
 
 public enum TaskGroup {
-    EDUCATION(R.string.group_education),
-    JOB(R.string.group_job),
-    HOME(R.string.group_home),
-    OTHER(R.string.group_other);
+    EDUCATION(R.string.group_education, "Education"),
+    JOB(R.string.group_job, "Job"),
+    HOME(R.string.group_home, "Home"),
+    OTHER(R.string.group_other, "Other");
 
-    private @StringRes
-    int name;
+    private @StringRes int name;
+    String systemName;
 
-    TaskGroup(@StringRes int name) {
+    TaskGroup(@StringRes int name, String systemName) {
         this.name = name;
+        this.systemName = systemName;
     }
 
     public int getName() {
         return name;
+    }
+
+    public static TaskGroup getItemByName(String name){
+        for (TaskGroup taskGroup: TaskGroup.values()){
+            if (taskGroup.systemName.equals(name))
+                return taskGroup;
+        }
+
+        return null;
     }
 }

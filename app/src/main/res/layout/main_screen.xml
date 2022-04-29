@@ -28,7 +28,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="#00FFFFFF"
-                    android:fontFamily="sans-serif"
                     android:layout_marginRight="50dp"
                     android:text="@string/tasks_text"
                     android:textSize="40sp"
