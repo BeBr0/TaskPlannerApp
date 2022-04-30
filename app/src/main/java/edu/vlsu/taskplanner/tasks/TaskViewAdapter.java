@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -21,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.zip.Inflater;
 
 import edu.vlsu.taskplanner.R;
 
@@ -76,10 +74,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
 
         holder.itemView.setOnClickListener(this::openPopupWindow);
 
-        holder.itemView.setOnLongClickListener((View view) -> {
-            setPosition(position);
-            return false;
-        });
+        holder.itemView.setOnLongClickListener((View view) -> false);
 
         setItemTitle(holder);
 
@@ -153,11 +148,9 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
         if (days > 0){
             result += days + context.getString(R.string.days) + " ";
         }
-
         if (hours > 0){
             result += hours + context.getString(R.string.hours) + " ";
         }
-
         if (time > 0 || (time == 0 && result.equals(""))){
             result += time + context.getString(R.string.minutes) + " ";
         }
@@ -209,16 +202,6 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
     @Override
     public int getItemCount() {
         return TaskList.getCount();
-    }
-
-    private int position;
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
     }
     
 }

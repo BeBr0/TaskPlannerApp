@@ -68,7 +68,7 @@ public class Database extends  SQLiteOpenHelper{
         contentValues.put(GROUP_COLUMN, task.getTaskGroup().systemName);
         contentValues.put(CREATION_TIME_COLUMN, task.getTimeOfCreation().getTime().getTime());
 
-        if (TaskList.getTaskByName(task.getDisplayName()) != null)
+        if (TaskList.getTaskByName(task.getDisplayName()) == null)
             getWritableDatabase().execSQL("INSERT INTO tasks VALUES" + "(" +
                     contentValues.get(ID_COLUMN) + ", '" +
                     contentValues.get(NAME_COLUMN) + "', '" +
@@ -81,9 +81,5 @@ public class Database extends  SQLiteOpenHelper{
 
         else
             getWritableDatabase().update("tasks", contentValues, "id = " + task.getId(), new String[]{});
-    }
-
-    public void clearTable(String name){
-        getWritableDatabase().execSQL("DELETE FROM " + name);
     }
 }

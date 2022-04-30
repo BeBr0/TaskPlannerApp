@@ -37,29 +37,10 @@ public class MainScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
-        recyclerView = findViewById(R.id.recycler_view);
-        TaskViewAdapter adapter= new TaskViewAdapter();
-
-        GridLayoutManager layoutManager=new GridLayoutManager(this,2);
-
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-        TaskList.sort((TaskViewAdapter) recyclerView.getAdapter());
-
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout_main);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
-
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-
-        findViewById(R.id.side_bar_open_btn).setOnClickListener(view -> {
-            if (!drawerLayout.isDrawerOpen(findViewById(R.id.nav)))
-                drawerLayout.openDrawer(findViewById(R.id.nav));
-            else
-                drawerLayout.closeDrawer(findViewById(R.id.nav));
-        });
+        setupRecyclerView();
+        setupDrawer();
 
         findViewById(R.id.add_task_btn).setOnClickListener(view -> {
             Intent intent = new Intent(MainScreen.this, EditTaskScreen.class);
@@ -77,13 +58,43 @@ public class MainScreen extends AppCompatActivity {
             startActivity(intent);
         }
         else if (item.getItemId() == R.id.done_item){
-            recyclerView.getAdapter().notifyItemRemoved(TaskList.getIndex(task));
-            task.markAsDone(this);
+            if (recyclerView.getAdapter() != null) {
+                recyclerView.getAdapter().notifyItemRemoved(TaskList.getIndex(task));
+                task.markAsDone(this);
+            }
         }
         else if (item.getItemId() == R.id.delete_item){
-            recyclerView.getAdapter().notifyItemRemoved(TaskList.getIndex(task));
-            TaskList.remove(task);
+            if (recyclerView.getAdapter() != null) {
+                recyclerView.getAdapter().notifyItemRemoved(TaskList.getIndex(task));
+                TaskList.remove(task);
+            }
         }
         return true;
+    }
+
+    private void setupRecyclerView(){
+        recyclerView = findViewById(R.id.recycler_view);
+        TaskViewAdapter adapter= new TaskViewAdapter();
+
+        GridLayoutManager layoutManager=new GridLayoutManager(this,2);
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        TaskList.sort((TaskViewAdapter) recyclerView.getAdapter());
+    }
+
+    private void setupDrawer(){
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout_main);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        findViewById(R.id.side_bar_open_btn).setOnClickListener(view -> {
+            if (!drawerLayout.isDrawerOpen(findViewById(R.id.nav)))
+                drawerLayout.openDrawer(findViewById(R.id.nav));
+            else
+                drawerLayout.closeDrawer(findViewById(R.id.nav));
+        });
     }
 }

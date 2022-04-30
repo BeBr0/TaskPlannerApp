@@ -21,9 +21,8 @@ public class LoadScreen extends AppCompatActivity {
         setTheme(R.style.Light_MainScreen);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.load_screen);
-        Database.createInstance(this);
 
-//        Task.notificationHelper = new NotificationHelper(this);
+        Database.createInstance(this);
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
