@@ -30,4 +30,6 @@
     <string name="notification_set">مجموعة الإخطار</string>
     <string name="notification_not_set">لا يوجد إشعارات</string>
     <string name="error_forbidden_symbols">العنوان أو الوصف يحتوي على أحرف محظورة</string>
+    <string name="date">التاريخ:</string>
+    <string name="time">الوقت:</string>
 </resources>

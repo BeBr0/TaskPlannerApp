@@ -34,4 +34,6 @@
     <string name="notification_set">Уведомление установлено</string>
     <string name="notification_not_set">Уведомление не установлено</string>
     <string name="error_forbidden_symbols">Название или описание содержит запрещенные символы</string>
+    <string name="date">Дата:</string>
+    <string name="time">Время:</string>
 </resources>

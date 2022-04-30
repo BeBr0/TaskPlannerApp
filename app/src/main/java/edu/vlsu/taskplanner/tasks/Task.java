@@ -20,6 +20,7 @@ public class Task implements Cloneable{
     public static Task chosenTask;
 
     private final int id;
+    public static SimpleDateFormat dateFormat;
 
     private String displayName;
     private String description;
@@ -33,8 +34,6 @@ public class Task implements Cloneable{
     private TaskGroup taskGroup;
 
     private PendingIntent alarmIntent;
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("Дата: dd.MM.yyyy, Время: HH:mm", Locale.ENGLISH);
 
     /** Используется при создании задачи с помощью кнопки*/
     public Task(){

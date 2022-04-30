@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import edu.vlsu.taskplanner.tasks.Task;
 import edu.vlsu.taskplanner.tasks.TaskGroup;
@@ -21,6 +23,8 @@ public class LoadScreen extends AppCompatActivity {
         setTheme(R.style.Light_MainScreen);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.load_screen);
+
+        Task.dateFormat = new SimpleDateFormat("'" + getString(R.string.date) + "' dd.MM.yyyy, '" + getString(R.string.time) + "' HH:mm", Locale.forLanguageTag("ru"));
 
         Database.createInstance(this);
 
