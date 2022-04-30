@@ -32,4 +32,5 @@
     <string name="error_time_missing">Установите время упоминания!</string>
     <string name="notification_set">Уведомление установлено</string>
     <string name="notification_not_set">Уведомление не установлено</string>
+    <string name="error_forbidden_symbols">Название или описание содержит запрещенные символы</string>
 </resources>

@@ -33,4 +33,5 @@
     <string name="error_time_missing">Notify time missing</string>
     <string name="notification_set">Notification set</string>
     <string name="notification_not_set">No notification</string>
+    <string name="error_forbidden_symbols">Name or description contain forbidden symbols</string>
 </resources>

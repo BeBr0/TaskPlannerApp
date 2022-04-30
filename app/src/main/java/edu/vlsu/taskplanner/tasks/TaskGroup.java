@@ -14,7 +14,7 @@ public enum TaskGroup {
     HOME(R.string.group_home, "Home"),
     OTHER(R.string.group_other, "Other");
 
-    private @StringRes int name;
+    private @StringRes final int name;
     public String systemName;
 
     TaskGroup(@StringRes int name, String systemName) {

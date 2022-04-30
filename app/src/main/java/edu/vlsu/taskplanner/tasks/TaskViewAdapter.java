@@ -27,7 +27,9 @@ import edu.vlsu.taskplanner.R;
 
 public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHolder> {
 
-    public class TaskHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, View.OnClickListener{
+    private Task task;
+
+    public static class TaskHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
 
         TextView title, description, timeLeft, datetime, group;
 
@@ -53,11 +55,6 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
             contextMenu.add(Menu.NONE, R.id.delete_item, Menu.NONE, context.getString(R.string.remove));
             contextMenu.add(Menu.NONE, R.id.done_item, Menu.NONE, context.getString(R.string.mark_done));
         }
-
-        @Override
-        public void onClick(View view){
-
-        }
     }
 
     @NonNull
@@ -73,87 +70,64 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
 
     @Override
     public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
-        Task task = TaskList.getByIndex(position);
+        task = TaskList.getByIndex(position);
 
         Context context = holder.title.getContext();
 
-        TextView title = holder.title;
-        title.setText(task.getDisplayName());
-
-//        TextView description = holder.description;
-//        String descText = task.getDescription();
-//        if (descText.length() > 50){
-//            String newText = "";
-//            for (int i = 0; i <= 50; i++){
-//                newText += descText.charAt(i);
-//            }
-//            descText = newText + "...";
-//        }
-//        description.setText(descText);
-
-        holder.itemView.setOnClickListener((View view) -> {
-            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
-
-            View popUpDatePickerView = layoutInflater.inflate(R.layout.focus_task, null);
-
-            final PopupWindow popupDatePicker = new PopupWindow(popUpDatePickerView, LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT, true);
-
-            popupDatePicker.showAtLocation(popUpDatePickerView, Gravity.CENTER, 0, 0);
-
-            TextView focus_title, focus_description, focus_time, focus_group, focus_alarm;
-            focus_title = popUpDatePickerView.findViewById(R.id.focus_title);
-            focus_description = popUpDatePickerView.findViewById(R.id.focus_description);
-            focus_time = popUpDatePickerView.findViewById(R.id.focus_start_time);
-            focus_group = popUpDatePickerView.findViewById(R.id.focus_group);
-            focus_alarm = popUpDatePickerView.findViewById(R.id.focus_notify);
-
-            focus_title.setText(task.getDisplayName());
-            focus_description.setText(task.getDescription());
-            focus_time.setText(task.formStartDateString());
-            focus_group.setText(context.getString(task.getTaskGroup().getName()));
-            if (task.isAlarmNeeded()) {
-                focus_alarm.setText(context.getString(R.string.notification_set));
-            }
-            else{
-                focus_alarm.setText(context.getString(R.string.notification_not_set));
-            }
-        });
+        holder.itemView.setOnClickListener(this::openPopupWindow);
 
         holder.itemView.setOnLongClickListener((View view) -> {
             setPosition(position);
             return false;
         });
 
+        setItemTitle(holder);
+
         if (task.getStartTime().getTime().getTime() != -1) {
-
-            TextView timeLeft = holder.timeLeft;
-            String timeText;
-
-            timeText = getTimeLeft(
-                            task.getStartTime().getTime().getTime(),
-                            Calendar.getInstance().getTime().getTime(), holder.itemView.getContext()
-                    );
-
-            timeLeft.setText(timeText);
-            float timePercentage = 1 - (float)(Calendar.getInstance().getTime().getTime() - task.getTimeOfCreation().getTime().getTime()) / (task.getStartTime().getTime().getTime() - Calendar.getInstance().getTime().getTime() );
-
-            if (timePercentage > 0.75){
-                timeLeft.setTextColor(context.getColor(R.color.more_than_75));
-            }
-            else if (timePercentage > 0.5){
-                timeLeft.setTextColor(context.getColor(R.color.more_than_50));
-            }
-            else if (timePercentage > 0.25){
-                timeLeft.setTextColor(context.getColor(R.color.more_than_25));
-            }
-            else{
-                timeLeft.setTextColor(context.getColor(R.color.ago));
-            }
-
-            TextView datetime = holder.datetime;
-            datetime.setText(getFormattedDate(task.getStartTime().getTime().getTime()));
+            setItemTimeLeft(holder, context);
+            setItemDateTime(holder);
         }
+
+        setItemGroupName(holder);
+    }
+
+    private void setItemTitle(TaskHolder holder){
+        TextView title = holder.title;
+        title.setText(task.getDisplayName());
+    }
+
+    private void setItemTimeLeft(TaskHolder holder, Context context){
+        TextView timeLeft = holder.timeLeft;
+        String timeText;
+
+        timeText = getTimeLeft(
+                task.getStartTime().getTime().getTime(),
+                Calendar.getInstance().getTime().getTime(), holder.itemView.getContext()
+        );
+
+        timeLeft.setText(timeText);
+        float timePercentage = 1 - (float)(Calendar.getInstance().getTime().getTime() - task.getTimeOfCreation().getTime().getTime()) / (task.getStartTime().getTime().getTime() - Calendar.getInstance().getTime().getTime() );
+
+        if (timePercentage > 0.75){
+            timeLeft.setTextColor(context.getColor(R.color.more_than_75));
+        }
+        else if (timePercentage > 0.5){
+            timeLeft.setTextColor(context.getColor(R.color.more_than_50));
+        }
+        else if (timePercentage > 0.25){
+            timeLeft.setTextColor(context.getColor(R.color.more_than_25));
+        }
+        else{
+            timeLeft.setTextColor(context.getColor(R.color.ago));
+        }
+    }
+
+    private void setItemDateTime(TaskHolder holder){
+        TextView datetime = holder.datetime;
+        datetime.setText(getFormattedDate(task.getStartTime().getTime().getTime()));
+    }
+
+    private void setItemGroupName(TaskHolder holder){
         String groupName = "#" + task.getTaskGroup().name();
         holder.group.setText(groupName);
     }
@@ -190,7 +164,6 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
 
         if (passed)
             return  result + context.getString(R.string.ago);
-
         else
             return result + context.getString(R.string.time_left);
     }
@@ -201,6 +174,36 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.ENGLISH);
 
         return simpleDateFormat.format(date);
+    }
+
+    private void openPopupWindow(View view){
+        Context context = view.getContext();
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        View popUpDatePickerView = layoutInflater.inflate(R.layout.focus_task, null);
+
+        final PopupWindow popupDatePicker = new PopupWindow(popUpDatePickerView, LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, true);
+
+        popupDatePicker.showAtLocation(popUpDatePickerView, Gravity.CENTER, 0, 0);
+
+        TextView focus_title, focus_description, focus_time, focus_group, focus_alarm;
+        focus_title = popUpDatePickerView.findViewById(R.id.focus_title);
+        focus_description = popUpDatePickerView.findViewById(R.id.focus_description);
+        focus_time = popUpDatePickerView.findViewById(R.id.focus_start_time);
+        focus_group = popUpDatePickerView.findViewById(R.id.focus_group);
+        focus_alarm = popUpDatePickerView.findViewById(R.id.focus_notify);
+
+        focus_title.setText(task.getDisplayName());
+        focus_description.setText(task.getDescription());
+        focus_time.setText(task.formStartDateString());
+        focus_group.setText(context.getString(task.getTaskGroup().getName()));
+        if (task.isAlarmNeeded()) {
+            focus_alarm.setText(context.getString(R.string.notification_set));
+        }
+        else{
+            focus_alarm.setText(context.getString(R.string.notification_not_set));
+        }
     }
 
     @Override

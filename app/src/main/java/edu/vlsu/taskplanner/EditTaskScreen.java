@@ -91,11 +91,15 @@ public class EditTaskScreen extends AppCompatActivity {
                 Toast.makeText(this, getString(R.string.error_title_missing), Toast.LENGTH_LONG).show();
                 return;
             }
-            System.out.println(startPickerButton.getText().toString());
             if (startPickerButton.getText().toString().equals("Start time") && notify.isChecked()){
                 Toast.makeText(this, R.string.error_time_missing, Toast.LENGTH_LONG).show();
                 return;
             }
+            if (title.getText().toString().contains("><")){
+                Toast.makeText(this, getString(R.string.error_forbidden_symbols), Toast.LENGTH_LONG).show();
+                return;
+            }
+
             if (newTask.getStartTime() == null){
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(new Date(-1));

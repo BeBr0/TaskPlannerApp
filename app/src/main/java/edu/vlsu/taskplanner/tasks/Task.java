@@ -32,6 +32,8 @@ public class Task implements Cloneable{
 
     private TaskGroup taskGroup;
 
+    private PendingIntent alarmIntent;
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("Дата: dd.MM.yyyy, Время: HH:mm", Locale.ENGLISH);
 
     /** Используется при создании задачи с помощью кнопки*/
@@ -71,17 +73,15 @@ public class Task implements Cloneable{
             Intent intent = new Intent(context, NotificationReceiver.class);
             intent.setData(Uri.parse(displayName + "><" + description));
 
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, startTime.getTimeInMillis(), pendingIntent);
+            alarmIntent = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, startTime.getTimeInMillis(), alarmIntent);
         }
     }
 
     private void cancelAlarm(Context context){
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
 
-        alarmManager.cancel(pendingIntent);
+        alarmManager.cancel(alarmIntent);
     }
 
     public String formStartDateString(){
@@ -140,12 +140,12 @@ public class Task implements Cloneable{
     }
 
     public void setAlarmNeeded(boolean alarmNeeded, Context context) {
-        this.alarmNeeded = alarmNeeded;
-
-        if (!alarmNeeded)
+        if (!alarmNeeded && this.alarmNeeded)
             cancelAlarm(context);
-        else
+        else if (alarmNeeded && !this.alarmNeeded)
             setAlarm(context);
+
+        this.alarmNeeded = alarmNeeded;
     }
 
     public TaskGroup getTaskGroup() {
