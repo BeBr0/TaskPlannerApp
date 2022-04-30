@@ -30,4 +30,6 @@
     <string name="days">д.</string>
     <string name="ago">тому назад</string>
     <string name="error_time_missing">Установите время упоминания!</string>
+    <string name="notification_set">Уведомление установлено</string>
+    <string name="notification_not_set">Уведомление не установлено</string>
 </resources>

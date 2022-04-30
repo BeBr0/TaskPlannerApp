@@ -1,13 +1,14 @@
-package edu.vlsu.taskplanner.tasks;
+package edu.vlsu.taskplanner;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
+import edu.vlsu.taskplanner.tasks.Task;
+import edu.vlsu.taskplanner.tasks.TaskList;
 
-public class TasksDBWorker extends  SQLiteOpenHelper{
+public class Database extends  SQLiteOpenHelper{
     static String name = "database.db";
     static int version = 1;
 
@@ -19,7 +20,17 @@ public class TasksDBWorker extends  SQLiteOpenHelper{
     static String GROUP_COLUMN = "task_group";
     static String CREATION_TIME_COLUMN = "create_time";
 
-    public TasksDBWorker(@Nullable Context context) {
+    private static Database instance;
+
+    public static Database getInstance() {
+        return instance;
+    }
+
+    public static void createInstance(Context context){
+        instance = new Database(context);
+    }
+
+    private Database(Context context){
         super(context, name, null, version);
     }
 
@@ -57,7 +68,7 @@ public class TasksDBWorker extends  SQLiteOpenHelper{
         contentValues.put(GROUP_COLUMN, task.getTaskGroup().systemName);
         contentValues.put(CREATION_TIME_COLUMN, task.getTimeOfCreation().getTime().getTime());
 
-        if (!Task.exists(task))
+        if (TaskList.getTaskByName(task.getDisplayName()) != null)
             getWritableDatabase().execSQL("INSERT INTO tasks VALUES" + "(" +
                     contentValues.get(ID_COLUMN) + ", '" +
                     contentValues.get(NAME_COLUMN) + "', '" +

@@ -11,6 +11,11 @@
         <item name="checkedTextViewStyle">@style/Light_ToolbarTitle</item>
 <!--        <item name="cardViewStyle">@style/Light_cardView</item>-->
         <item name="android:textColor">@color/light_secondary</item>
+        <item name="android:contextPopupMenuStyle">@style/Light_contextMenu</item>
+    </style>
+
+    <style name="Light_contextMenu">
+        <item name="android:overlapAnchor">true</item>
     </style>
 
     <style name="Light_addTaskBtn">
@@ -97,7 +102,6 @@
         <item name="add_task_btn">@style/Dark_addTaskBtn</item>
         <item name="recycler_view_item">@style/Dark_cardView</item>
 
-        <item name="android:textViewStyle">@style/Dark_TaskTextView</item>
         <item name="imageButtonStyle">@style/Dark_ImageButton</item>
         <item name="android:toolbarStyle">@style/Dark_Toolbar</item>
         <item name="android:background">@color/dark_main</item>

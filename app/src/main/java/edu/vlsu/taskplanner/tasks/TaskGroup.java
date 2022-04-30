@@ -15,7 +15,7 @@ public enum TaskGroup {
     OTHER(R.string.group_other, "Other");
 
     private @StringRes int name;
-    String systemName;
+    public String systemName;
 
     TaskGroup(@StringRes int name, String systemName) {
         this.name = name;

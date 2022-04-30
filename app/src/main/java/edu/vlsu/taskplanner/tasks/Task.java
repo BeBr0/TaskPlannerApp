@@ -11,94 +11,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import edu.vlsu.taskplanner.R;
-import edu.vlsu.taskplanner.alarm.NotificationHelper;
 import edu.vlsu.taskplanner.alarm.NotificationReceiver;
 
 public class Task implements Cloneable{
-    static NotificationHelper notificationHelper;
-    public static TasksDBWorker dbWorker;
     public static Task chosenTask;
-
-    public static List<Task> taskList = new ArrayList<>();
-
-    public static boolean exists(Task task){
-        for (Task t: taskList){
-            if (t.id == task.id)
-                return true;
-        }
-
-        return false;
-    }
-
-    public static Task getTaskByName(String title){
-        for (Task task: taskList){
-            if (task.displayName.equals(title)){
-                return task;
-            }
-        }
-
-        return null;
-    }
-
-    /** Используется ТОЛЬКО при загрузке приложения! */
-    public static void addTaskToList(Task task){
-        taskList.add(task);
-    }
-
-    public static void add(Task task){
-        dbWorker.writeTaskToDB(task);
-
-        taskList.add(task);
-    }
-
-    public static void remove(Task task){
-        taskList.remove(task);
-
-        dbWorker.getWritableDatabase().execSQL("DELETE FROM tasks WHERE id = " + task.id);
-    }
-
-    public static void update(Task task){
-        if (!exists(task)){
-            add(task);
-            return;
-        }
-
-        for (Task t: taskList){
-            if (t.id == task.id)
-                taskList.set(taskList.indexOf(t), task);
-        }
-    }
-
-    public static void sort(TaskViewAdapter taskViewAdapter){
-        List<Task> sorted = new ArrayList<>();
-        for (TaskGroup taskGroup: TaskGroup.values()) {
-
-
-            for (int i = 0; i < taskList.size(); i++) {
-                if (taskList.get(i).taskGroup == taskGroup) {
-                    long minTime = -2;
-                    Task minTimeTask = null;
-                    for (int j = 0; j < taskList.size(); j++) {
-                        if (taskList.get(i).taskGroup == taskGroup) {
-                            if ((taskList.get(j).startTime.getTime().getTime() <= minTime || minTime == -2) && !sorted.contains(taskList.get(j))) {
-                                minTime = taskList.get(j).startTime.getTime().getTime();
-                                minTimeTask = taskList.get(j);
-                            }
-                        }
-                    }
-                    sorted.add(minTimeTask);
-                    taskViewAdapter.notifyItemMoved(taskList.indexOf(minTimeTask), sorted.size() - 1);
-                }
-            }
-        }
-        taskList.clear();
-        taskList.addAll(sorted);
-    }
 
     private final int id;
 
@@ -120,7 +39,7 @@ public class Task implements Cloneable{
         int ctr = 0;
         while (true) {
             boolean isValid = true;
-            for (Task task : taskList) {
+            for (Task task : TaskList.getTaskListClone()) {
                 if (task.id == ctr) {
                     isValid = false;
                     break;
@@ -137,15 +56,13 @@ public class Task implements Cloneable{
         this.description =  "";
     }
 
-    public Task(int id, String displayName, String description, Calendar startTime, Context context, boolean alarmNeeded, TaskGroup taskGroup) {
+    public Task(int id, String displayName, String description, Calendar startTime, boolean alarmNeeded, TaskGroup taskGroup) {
         this.id = id;
         this.displayName = displayName;
         this.description = description;
         this.startTime = startTime;
         this.alarmNeeded = alarmNeeded;
         this.taskGroup = taskGroup;
-
-        notificationHelper = new NotificationHelper(context);
     }
 
     private void setAlarm(Context context){
@@ -172,7 +89,7 @@ public class Task implements Cloneable{
     }
 
     public void markAsDone(Context context){
-        Task.remove(this);
+        TaskList.remove(this);
         Toast.makeText(context, context.getString(R.string.mark_done), Toast.LENGTH_LONG).show();
     }
 

@@ -3,7 +3,6 @@ package edu.vlsu.taskplanner;
 import android.content.Intent;
 import android.database.Cursor;
 import android.icu.util.Calendar;
-import android.icu.util.GregorianCalendar;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +12,7 @@ import java.sql.Date;
 
 import edu.vlsu.taskplanner.tasks.Task;
 import edu.vlsu.taskplanner.tasks.TaskGroup;
-import edu.vlsu.taskplanner.tasks.TasksDBWorker;
+import edu.vlsu.taskplanner.tasks.TaskList;
 
 public class LoadScreen extends AppCompatActivity {
 
@@ -22,7 +21,9 @@ public class LoadScreen extends AppCompatActivity {
         setTheme(R.style.Light_MainScreen);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.load_screen);
-        Task.dbWorker = new TasksDBWorker(this);
+        Database.createInstance(this);
+
+//        Task.notificationHelper = new NotificationHelper(this);
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
@@ -32,7 +33,7 @@ public class LoadScreen extends AppCompatActivity {
     }
 
     private void loadDataFromDataBase(){
-        Cursor cursor = Task.dbWorker.getReadableDatabase().rawQuery("SELECT * FROM tasks",null);
+        Cursor cursor = Database.getInstance().getReadableDatabase().rawQuery("SELECT * FROM tasks",null);
         while (cursor.moveToNext()) {
             Calendar startTime = Calendar.getInstance();
             startTime.setTime(new Date(Long.parseLong(cursor.getString(3))));
@@ -43,7 +44,6 @@ public class LoadScreen extends AppCompatActivity {
                     cursor.getString(1),
                     cursor.getString(2),
                     startTime,
-                    this,
                     Boolean.parseBoolean(cursor.getString(4)),
                     TaskGroup.getItemByName(cursor.getString(5))
             );
@@ -51,7 +51,7 @@ public class LoadScreen extends AppCompatActivity {
             calendar.setTime(new Date(Long.parseLong(cursor.getString(6))));
             task.setTimeOfCreation(calendar);
 
-            Task.addTaskToList(task);
+            TaskList.addToListOnly(task);
         }
 
         cursor.close();

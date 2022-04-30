@@ -3,26 +3,18 @@ package edu.vlsu.taskplanner;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.navigation.NavigationView;
 
 import edu.vlsu.taskplanner.settings.Theme;
 import edu.vlsu.taskplanner.tasks.Task;
+import edu.vlsu.taskplanner.tasks.TaskList;
 import edu.vlsu.taskplanner.tasks.TaskViewAdapter;
 
 public class MainScreen extends AppCompatActivity {
@@ -52,8 +44,7 @@ public class MainScreen extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
-        Task.sort((TaskViewAdapter) recyclerView.getAdapter());
+        TaskList.sort((TaskViewAdapter) recyclerView.getAdapter());
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
@@ -79,23 +70,19 @@ public class MainScreen extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item){
         Task task = Task.chosenTask;
-        if (task == null)
-            return false;
 
         if (item.getItemId() == R.id.edit_item){
             Intent intent = new Intent(MainScreen.this, EditTaskScreen.class);
-            intent.putExtra("task", Task.taskList.indexOf(task));
+            intent.putExtra("task", TaskList.getIndex(task));
             startActivity(intent);
         }
         else if (item.getItemId() == R.id.done_item){
+            recyclerView.getAdapter().notifyItemRemoved(TaskList.getIndex(task));
             task.markAsDone(this);
-            recyclerView.removeView(item.getActionView());
-            recyclerView.getAdapter().notifyItemRemoved(item.getGroupId());
         }
         else if (item.getItemId() == R.id.delete_item){
-            Task.remove(task);
-            recyclerView.removeView(item.getActionView());
-            recyclerView.getAdapter().notifyItemRemoved(item.getGroupId());
+            recyclerView.getAdapter().notifyItemRemoved(TaskList.getIndex(task));
+            TaskList.remove(task);
         }
         return true;
     }

@@ -27,4 +27,6 @@
     <string name="days">d.</string>
     <string name="ago">منذ</string>
     <string name="error_time_missing">ضبط وقت التذكير</string>
+    <string name="notification_set">مجموعة الإخطار</string>
+    <string name="notification_not_set">لا يوجد إشعارات</string>
 </resources>

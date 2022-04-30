@@ -29,6 +29,7 @@ import java.util.Date;
 import edu.vlsu.taskplanner.settings.Theme;
 import edu.vlsu.taskplanner.tasks.Task;
 import edu.vlsu.taskplanner.tasks.TaskGroup;
+import edu.vlsu.taskplanner.tasks.TaskList;
 
 public class EditTaskScreen extends AppCompatActivity {
 
@@ -71,7 +72,7 @@ public class EditTaskScreen extends AppCompatActivity {
             newTask = new Task();
         }
         else{
-            newTask = Task.taskList.get(index).clone();
+            newTask = TaskList.getByIndex(index).clone();
             updateScreenTexts();
             ((CheckBox) findViewById(R.id.notification_check)).setChecked(newTask.isAlarmNeeded());
         }
@@ -80,7 +81,7 @@ public class EditTaskScreen extends AppCompatActivity {
             TextView title = findViewById(R.id.form_title);
             TextView description = findViewById(R.id.form_description);
             CheckBox notify = (CheckBox) findViewById(R.id.notification_check);
-            for (Task task: Task.taskList){
+            for (Task task: TaskList.getTaskListClone()){
                 if (task.getDisplayName().equals(title.getText().toString()) && newTask.getId() != task.getId()){
                     Toast.makeText(this, getString(R.string.error_title_exists), Toast.LENGTH_LONG).show();
                     return;
@@ -108,7 +109,7 @@ public class EditTaskScreen extends AppCompatActivity {
 
             newTask.setTimeOfCreation(Calendar.getInstance());
 
-            Task.update(newTask);
+            TaskList.update(newTask);
 
             Intent intent = new Intent(EditTaskScreen.this, MainScreen.class);
             startActivity(intent);
@@ -121,7 +122,7 @@ public class EditTaskScreen extends AppCompatActivity {
     }
 
     private void updateScreenTexts(){
-        if (Task.exists(newTask)) {
+        if (TaskList.getTaskByName(newTask.getDisplayName()) != null) {
             ((TextView) findViewById(R.id.form_title)).setText(newTask.getDisplayName());
             ((TextView) findViewById(R.id.form_description)).setText(newTask.getDescription());
         }

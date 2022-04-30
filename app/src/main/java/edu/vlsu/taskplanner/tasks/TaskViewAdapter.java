@@ -1,45 +1,35 @@
 package edu.vlsu.taskplanner.tasks;
 
-import android.app.AlertDialog;
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.telephony.ims.RcsUceAdapter;
 import android.view.ContextMenu;
-import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.chrono.Chronology;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.FormatStyle;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
+import java.util.zip.Inflater;
 
-import edu.vlsu.taskplanner.EditTaskScreen;
 import edu.vlsu.taskplanner.R;
-import edu.vlsu.taskplanner.settings.Theme;
 
 public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHolder> {
 
-    public class TaskHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
+    public class TaskHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, View.OnClickListener{
 
         TextView title, description, timeLeft, datetime, group;
-        Button taskOpenButton;
 
         public TaskHolder(@NonNull View itemView) {
             super(itemView);
@@ -50,8 +40,6 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
             this.datetime = itemView.findViewById(R.id.date_time);
             this.group = itemView.findViewById(R.id.group);
 
-            this.taskOpenButton = itemView.findViewById(R.id.task_open_btn);
-
             itemView.setOnCreateContextMenuListener(this);
         }
 
@@ -59,11 +47,16 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
         public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
             Context context = view.getContext();
 
-            Task.chosenTask = Task.getTaskByName(title.getText().toString());
+            Task.chosenTask = TaskList.getTaskByName(title.getText().toString());
 
             contextMenu.add(Menu.NONE, R.id.edit_item, Menu.NONE, context.getString(R.string.edit));
             contextMenu.add(Menu.NONE, R.id.delete_item, Menu.NONE, context.getString(R.string.remove));
             contextMenu.add(Menu.NONE, R.id.done_item, Menu.NONE, context.getString(R.string.mark_done));
+        }
+
+        @Override
+        public void onClick(View view){
+
         }
     }
 
@@ -80,32 +73,57 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
 
     @Override
     public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
-
-        Task task = Task.taskList.get(position);
+        Task task = TaskList.getByIndex(position);
 
         Context context = holder.title.getContext();
-
-        Button button = holder.taskOpenButton;
-        button.setOnLongClickListener((View btn) -> {
-            Task.chosenTask = task;
-            setPosition(position);
-
-            return false;
-        });
 
         TextView title = holder.title;
         title.setText(task.getDisplayName());
 
-        TextView description = holder.description;
-        String descText = task.getDescription();
-        if (descText.length() > 50){
-            String newText = "";
-            for (int i = 0; i <= 50; i++){
-                newText += descText.charAt(i);
+//        TextView description = holder.description;
+//        String descText = task.getDescription();
+//        if (descText.length() > 50){
+//            String newText = "";
+//            for (int i = 0; i <= 50; i++){
+//                newText += descText.charAt(i);
+//            }
+//            descText = newText + "...";
+//        }
+//        description.setText(descText);
+
+        holder.itemView.setOnClickListener((View view) -> {
+            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+            View popUpDatePickerView = layoutInflater.inflate(R.layout.focus_task, null);
+
+            final PopupWindow popupDatePicker = new PopupWindow(popUpDatePickerView, LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT, true);
+
+            popupDatePicker.showAtLocation(popUpDatePickerView, Gravity.CENTER, 0, 0);
+
+            TextView focus_title, focus_description, focus_time, focus_group, focus_alarm;
+            focus_title = popUpDatePickerView.findViewById(R.id.focus_title);
+            focus_description = popUpDatePickerView.findViewById(R.id.focus_description);
+            focus_time = popUpDatePickerView.findViewById(R.id.focus_start_time);
+            focus_group = popUpDatePickerView.findViewById(R.id.focus_group);
+            focus_alarm = popUpDatePickerView.findViewById(R.id.focus_notify);
+
+            focus_title.setText(task.getDisplayName());
+            focus_description.setText(task.getDescription());
+            focus_time.setText(task.formStartDateString());
+            focus_group.setText(context.getString(task.getTaskGroup().getName()));
+            if (task.isAlarmNeeded()) {
+                focus_alarm.setText(context.getString(R.string.notification_set));
             }
-            descText = newText + "...";
-        }
-        description.setText(descText);
+            else{
+                focus_alarm.setText(context.getString(R.string.notification_not_set));
+            }
+        });
+
+        holder.itemView.setOnLongClickListener((View view) -> {
+            setPosition(position);
+            return false;
+        });
 
         if (task.getStartTime().getTime().getTime() != -1) {
 
@@ -120,7 +138,6 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
             timeLeft.setText(timeText);
             float timePercentage = 1 - (float)(Calendar.getInstance().getTime().getTime() - task.getTimeOfCreation().getTime().getTime()) / (task.getStartTime().getTime().getTime() - Calendar.getInstance().getTime().getTime() );
 
-            System.out.println(timePercentage);
             if (timePercentage > 0.75){
                 timeLeft.setTextColor(context.getColor(R.color.more_than_75));
             }
@@ -188,7 +205,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
 
     @Override
     public int getItemCount() {
-        return Task.taskList.size();
+        return TaskList.getCount();
     }
 
     private int position;
