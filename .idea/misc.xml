@@ -23,7 +23,9 @@
         <entry key="app/src/main/res/drawable/button_dark.xml" value="0.2605" />
         <entry key="app/src/main/res/drawable/button_light.xml" value="0.2605" />
         <entry key="app/src/main/res/drawable/button_plus.xml" value="0.2605" />
+        <entry key="app/src/main/res/drawable/button_plus_dark.xml" value="0.267" />
         <entry key="app/src/main/res/drawable/button_plus_darl.xml" value="0.255" />
+        <entry key="app/src/main/res/drawable/button_plus_light.xml" value="0.267" />
         <entry key="app/src/main/res/drawable/calendar_background.xml" value="0.2705" />
         <entry key="app/src/main/res/drawable/faq_pic.xml" value="0.2605" />
         <entry key="app/src/main/res/drawable/file.xml" value="0.241" />

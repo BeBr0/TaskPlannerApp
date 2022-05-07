@@ -48,9 +48,9 @@ public class EditTaskScreen extends AppCompatActivity {
     @Override
     public Resources.Theme getTheme(){
         Resources.Theme theme = super.getTheme();
-        if (Settings.currentTheme == Theme.LIGHT)
+        if (SettingsController.currentTheme == Theme.LIGHT)
             theme.applyStyle(R.style.Light_EditTaskScreen, true);
-        else if (Settings.currentTheme == Theme.DARK){
+        else if (SettingsController.currentTheme == Theme.DARK){
             theme.applyStyle(R.style.Dark_EditTaskScreen, true);
         }
         return theme;

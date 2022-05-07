@@ -24,10 +24,10 @@ public class MainScreen extends AppCompatActivity {
     @Override
     public Resources.Theme getTheme(){
         Resources.Theme theme = super.getTheme();
-        if (Settings.currentTheme == Theme.LIGHT){
+        if (SettingsController.currentTheme == Theme.LIGHT){
             theme.applyStyle(R.style.Light_MainScreen, true);
         }
-        else if (Settings.currentTheme == Theme.DARK){
+        else if (SettingsController.currentTheme == Theme.DARK){
             theme.applyStyle(R.style.Dark_MainScreen, true);
         }
         return theme;

@@ -73,7 +73,6 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
         Context context = holder.title.getContext();
 
         holder.itemView.setOnClickListener(this::openPopupWindow);
-
         holder.itemView.setOnLongClickListener((View view) -> false);
 
         setItemTitle(holder);
@@ -170,22 +169,25 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
     }
 
     private void openPopupWindow(View view){
+        TextView title = view.findViewById(R.id.title);
+        task = TaskList.getTaskByName(title.getText().toString());
+        
         Context context = view.getContext();
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
 
-        View popUpDatePickerView = layoutInflater.inflate(R.layout.focus_task, null);
+        View popupView = layoutInflater.inflate(R.layout.focus_task, null);
 
-        final PopupWindow popupDatePicker = new PopupWindow(popUpDatePickerView, LinearLayout.LayoutParams.WRAP_CONTENT,
+        final PopupWindow popupFocusWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT, true);
 
-        popupDatePicker.showAtLocation(popUpDatePickerView, Gravity.CENTER, 0, 0);
+        popupFocusWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
         TextView focus_title, focus_description, focus_time, focus_group, focus_alarm;
-        focus_title = popUpDatePickerView.findViewById(R.id.focus_title);
-        focus_description = popUpDatePickerView.findViewById(R.id.focus_description);
-        focus_time = popUpDatePickerView.findViewById(R.id.focus_start_time);
-        focus_group = popUpDatePickerView.findViewById(R.id.focus_group);
-        focus_alarm = popUpDatePickerView.findViewById(R.id.focus_notify);
+        focus_title = popupView.findViewById(R.id.focus_title);
+        focus_description = popupView.findViewById(R.id.focus_description);
+        focus_time = popupView.findViewById(R.id.focus_start_time);
+        focus_group = popupView.findViewById(R.id.focus_group);
+        focus_alarm = popupView.findViewById(R.id.focus_notify);
 
         focus_title.setText(task.getDisplayName());
         focus_description.setText(task.getDescription());

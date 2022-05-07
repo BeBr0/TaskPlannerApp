@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout_main"
     tools:context=".MainScreen">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -61,19 +62,19 @@
             app:layout_constraintTop_toBottomOf="@+id/tb"
             android:clipToPadding="false"/>
 
-            <ImageButton
-                android:id="@+id/add_task_btn"
-                style="?attr/add_task_btn"
-                android:clickable="true"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="15dp"
-                android:src="@drawable/ic_plus"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:focusable="true"
-                android:contentDescription="@string/submit_task" />
+        <ImageButton
+            android:id="@+id/add_task_btn"
+            style="?attr/add_task_btn"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginBottom="15dp"
+            android:clickable="true"
+            android:contentDescription="@string/submit_task"
+            android:focusable="true"
+            android:src="@drawable/ic_plus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
