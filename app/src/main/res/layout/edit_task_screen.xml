@@ -2,6 +2,7 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -34,119 +35,180 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </Toolbar>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/task_data"
-        android:layout_width="300dp"
+        android:id="@+id/title_layout"
+        style="?attr/form_item"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:backgroundTintMode="multiply"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb">
+
+        <TextView
+            android:id="@+id/title_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:text="@string/task_title"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/form_title"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:autofillHints="@string/task_title"
             android:hint="@string/task_title"
+            android:inputType="textAutoCorrect"
             android:textAlignment="center"
             android:textAppearance="@style/Dark_EditText"
             android:textIsSelectable="true"
             app:flow_verticalAlign="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:autofillHints="@string/task_title"
-            android:inputType="textAutoCorrect" />
+            app:layout_constraintTop_toBottomOf="@+id/title_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/description_layout"
+        style="?attr/form_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_layout">
+
+        <TextView
+            android:id="@+id/description_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:background="@color/transparent"
+            android:text="@string/task_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/form_description"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:autofillHints="@string/task_description"
             android:hint="@string/task_description"
+            android:inputType="textAutoCorrect"
             android:maxLines="1"
             android:textAlignment="center"
             android:textIsSelectable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/form_title"
-            android:autofillHints="@string/task_description"
-            android:inputType="textAutoCorrect"/>
+            app:layout_constraintTop_toBottomOf="@+id/description_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/date_layout"
+        style="?attr/form_item"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description_layout">
+
+        <TextView
+            android:id="@+id/date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:background="@color/transparent"
+            android:text="@string/start_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/form_start_date"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="0dp"
+            android:background="@color/transparent"
             android:gravity="center"
             android:text="@string/start_time"
             android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/form_description" />
+            app:layout_constraintTop_toBottomOf="@+id/date_label" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="match_parent"
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        style="?attr/form_item"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_layout">
+
+        <CheckBox
+            android:id="@+id/notification_check"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/Light_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:text="@string/notification"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner">
+            app:layout_constraintStart_toStartOf="@+id/notification_check"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <CheckBox
-                android:id="@+id/notification_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                style="@style/Light_notification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#00FFFFFF"
-                android:text="@string/notification"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/notification_check"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/group_layout"
+        style="?attr/form_item"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="40dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/submit_task"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:spinnerMode="dropdown"
-            app:layout_constraintTop_toBottomOf="@+id/form_start_date" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/cancel_task"
-        android:layout_width="115dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="@string/cancel"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/task_data"
-        app:layout_constraintTop_toBottomOf="@+id/task_data" />
-
-    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submit_task"
-        android:layout_width="115dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
         android:gravity="center"
+
         android:text="@string/submit_task"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/task_data"
-        app:layout_constraintTop_toBottomOf="@+id/task_data" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

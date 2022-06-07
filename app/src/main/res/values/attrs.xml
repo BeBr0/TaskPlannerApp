@@ -3,4 +3,7 @@
     <attr name="add_task_btn" format="reference"/>
     <attr name="recycler_view_item" format="reference"/>
     <attr name="focus_window" format="reference"/>
+    <attr name="picker" format="reference"/>
+
+    <attr name="form_item" format="reference"/>
 </resources>

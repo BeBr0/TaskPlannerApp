@@ -2,6 +2,7 @@
 <resources>
     <color name="light_main">#ffffcc</color>
     <color name="light_secondary">#F92F7B</color>
+    <color name="light_form">#20A1A1A1</color>
 
     <color name="dark_main">#202021</color>
     <color name="dark_secondary">#303030</color>

@@ -13,6 +13,13 @@
         <item name="android:contextPopupMenuStyle">@style/Light_contextMenu</item>
     </style>
 
+    <style name="Light_formItem">
+        <item name="paddingStart">30dp</item>
+        <item name="paddingEnd">30dp</item>
+
+        <item name="android:background">@color/light_form</item>
+    </style>
+
     <style name="Light_contextMenu">
         <item name="android:overlapAnchor">true</item>
     </style>
@@ -33,17 +40,29 @@
     <style name="Light_EditTaskScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:statusBarColor">@color/light_secondary</item>
 
-        <item name="editTextStyle">@style/Light_EditText</item>
         <item name="android:background">@color/light_main</item>
         <item name="buttonStyle">@style/Light_Button</item>
         <item name="imageButtonStyle">@style/Light_ImageButton</item>
-        <item name="android:textViewStyle">@style/Light_TaskEditTextView</item>
         <item name="android:timePickerDialogTheme">@style/Light_DateAndTimePickers</item>
         <item name="android:datePickerDialogTheme">@style/Light_DateAndTimePickers</item>
         <item name="android:spinnerItemStyle">@style/Light_dropdown</item>
+        <item name="form_item">@style/Light_formItem</item>
+
+        <item name="picker">@style/Light_Picker</item>
 
         <item name="android:toolbarStyle">@style/Light_Toolbar</item>
         <item name="checkedTextViewStyle">@style/Light_ToolbarTitle</item>
+        <item name="android:spinnerStyle">@style/Light_Spinner</item>
+    </style>
+
+    <style name="Light_Spinner">
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="Light_Picker">
+        <item name="android:background">@color/dark_text</item>
+        <item name="android:textColor">@color/dark_main</item>
+        <item name="android:datePickerStyle">@style/Dark_Spinner</item>
     </style>
 
     <style name="Light_dropdown">
@@ -115,6 +134,13 @@
         <item name="android:background">@drawable/button_plus_dark</item>
     </style>
 
+    <style name="Dark_formItem">
+        <item name="paddingStart">30dp</item>
+        <item name="paddingEnd">30dp</item>
+
+        <item name="android:background">@color/light_form</item>
+    </style>
+
     <style name="Dark_focus" parent="CardView">
         <item name="android:background">@drawable/form_item_dark</item>
         <item name="android:textColor">@color/dark_text</item>
@@ -142,9 +168,21 @@
         <item name="android:textViewStyle">@style/Dark_TaskEditTextView</item>
         <item name="android:timePickerDialogTheme">@style/Dark_DateAndTimePickers</item>
         <item name="android:datePickerDialogTheme">@style/Dark_DateAndTimePickers</item>
+        <item name="form_item">@style/Dark_formItem</item>
+        <item name="picker">@style/Dark_Picker</item>
 
         <item name="android:toolbarStyle">@style/Dark_Toolbar</item>
         <item name="checkedTextViewStyle">@style/Dark_ToolbarTitle</item>
+    </style>
+
+    <style name="Dark_Spinner">
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="Dark_Picker">
+        <item name="android:background">@color/dark_text</item>
+        <item name="android:textColor">@color/dark_main</item>
+        <item name="android:datePickerStyle">@style/Dark_Spinner</item>
     </style>
 
     <style name="Dark_ImageButton">

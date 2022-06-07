@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
@@ -39,7 +40,7 @@ public class EditTaskScreen extends AppCompatActivity {
     private DatePicker datePicker;
     private TimePicker timePicker;
 
-    private PopupWindow popupPicker, popupTimePicker;
+    private PopupWindow popupPicker;
 
     private Calendar taskDate;
 
@@ -81,7 +82,7 @@ public class EditTaskScreen extends AppCompatActivity {
 
         findViewById(R.id.submit_task).setOnClickListener(this::submitTask);
 
-        findViewById(R.id.cancel_task).setOnClickListener((View view) -> {
+        findViewById(R.id.task).setOnClickListener((View view) -> {
             Intent intent = new Intent(EditTaskScreen.this, MainScreen.class);
             startActivity(intent);
         });
@@ -151,6 +152,9 @@ public class EditTaskScreen extends AppCompatActivity {
 
         if (view.getId() == R.id.form_start_date)
             newTask.setStartTime(taskDate);
+
+        newTask.setDisplayName(((EditText) findViewById(R.id.form_title)).getText().toString());
+        newTask.setDescription(((EditText) findViewById(R.id.form_description)).getText().toString());
 
         updateScreenTexts();
     }
