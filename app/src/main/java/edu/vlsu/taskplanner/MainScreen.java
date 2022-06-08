@@ -49,6 +49,19 @@ public class MainScreen extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        setupRecyclerView();
+        setupDrawer();
+
+        findViewById(R.id.add_task_btn).setOnClickListener(view -> {
+            Intent intent = new Intent(MainScreen.this, EditTaskScreen.class);
+            startActivity(intent);
+        });
+    }
+
+    @Override
     public boolean onContextItemSelected(MenuItem item){
         Task task = Task.chosenTask;
 
