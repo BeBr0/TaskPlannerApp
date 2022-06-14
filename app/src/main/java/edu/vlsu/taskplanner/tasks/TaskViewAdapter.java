@@ -22,6 +22,8 @@ import java.util.Date;
 import java.util.Locale;
 
 import edu.vlsu.taskplanner.R;
+import edu.vlsu.taskplanner.SettingsController;
+import edu.vlsu.taskplanner.settings.Theme;
 
 public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHolder> {
 
@@ -100,7 +102,7 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
         );
 
         timeLeft.setText(timeText);
-        if (Calendar.getInstance().getTime().getTime() >= task.getStartTime().getTime().getTime()) {
+        if (Calendar.getInstance().getTime().getTime() >= task.getStartTime().getTime().getTime() && SettingsController.currentTheme == Theme.DARK) {
             timeLeft.setTextColor(context.getColor(R.color.ago));
             return;
         }

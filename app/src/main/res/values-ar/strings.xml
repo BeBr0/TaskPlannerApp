@@ -34,4 +34,5 @@
     <string name="time">الوقت:</string>
     <string name="light_theme">موضوع خفيف</string>
     <string name="dark_theme">مظهر داكن</string>
+    <string name="task_notification">تنبيه</string>
 </resources>

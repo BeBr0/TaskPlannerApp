@@ -38,4 +38,5 @@
     <string name="time">Time:</string>
     <string name="light_theme">Light theme</string>
     <string name="dark_theme">Dark theme</string>
+    <string name="task_notification">Notification</string>
 </resources>
