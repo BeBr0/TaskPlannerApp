@@ -100,6 +100,11 @@ public class TaskViewAdapter extends RecyclerView.Adapter<TaskViewAdapter.TaskHo
         );
 
         timeLeft.setText(timeText);
+        if (Calendar.getInstance().getTime().getTime() >= task.getStartTime().getTime().getTime()) {
+            timeLeft.setTextColor(context.getColor(R.color.ago));
+            return;
+        }
+
         float timePercentage = 1 - (float)(Calendar.getInstance().getTime().getTime() - task.getTimeOfCreation().getTime().getTime()) / (task.getStartTime().getTime().getTime() - Calendar.getInstance().getTime().getTime() );
 
         if (timePercentage > 0.75){

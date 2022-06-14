@@ -36,4 +36,6 @@
     <string name="error_forbidden_symbols">Название или описание содержит запрещенные символы</string>
     <string name="date">Дата:</string>
     <string name="time">Время:</string>
+    <string name="light_theme">Светлая тема</string>
+    <string name="dark_theme">Темная тема</string>
 </resources>

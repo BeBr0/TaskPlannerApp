@@ -11,6 +11,12 @@
         <item name="checkedTextViewStyle">@style/Light_ToolbarTitle</item>
         <item name="android:textColor">@color/light_secondary</item>
         <item name="android:contextPopupMenuStyle">@style/Light_contextMenu</item>
+
+        <item name="drawer_top">@style/Light_drawerTop</item>
+    </style>
+
+    <style name="Light_drawerTop">
+        <item name="android:background">@color/light_secondary</item>
     </style>
 
     <style name="Light_formItem">
@@ -128,6 +134,11 @@
         <item name="toolbarStyle">@style/Dark_Toolbar</item>
         <item name="android:textColor">@color/dark_text</item>
         <item name="cardViewStyle">@style/Dark_cardView</item>
+        <item name="drawer_top">@style/Dark_drawerTop</item>
+    </style>
+
+    <style name="Dark_drawerTop">
+        <item name="android:background">@color/dark_secondary</item>
     </style>
 
     <style name="Dark_addTaskBtn">

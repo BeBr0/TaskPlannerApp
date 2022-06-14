@@ -32,4 +32,6 @@
     <string name="error_forbidden_symbols">العنوان أو الوصف يحتوي على أحرف محظورة</string>
     <string name="date">التاريخ:</string>
     <string name="time">الوقت:</string>
+    <string name="light_theme">موضوع خفيف</string>
+    <string name="dark_theme">مظهر داكن</string>
 </resources>

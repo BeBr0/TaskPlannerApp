@@ -27,6 +27,7 @@
         <entry key="app/src/main/res/drawable/button_plus_darl.xml" value="0.255" />
         <entry key="app/src/main/res/drawable/button_plus_light.xml" value="0.267" />
         <entry key="app/src/main/res/drawable/calendar_background.xml" value="0.2705" />
+        <entry key="app/src/main/res/drawable/drawer_top.xml" value="0.267" />
         <entry key="app/src/main/res/drawable/faq_pic.xml" value="0.2605" />
         <entry key="app/src/main/res/drawable/file.xml" value="0.241" />
         <entry key="app/src/main/res/drawable/form_item_dark.xml" value="0.2605" />
@@ -43,7 +44,7 @@
         <entry key="app/src/main/res/layout/edit_task_screen.xml" value="0.33" />
         <entry key="app/src/main/res/layout/focus_task.xml" value="0.317481884057971" />
         <entry key="app/src/main/res/layout/load_screen.xml" value="0.22327898550724637" />
-        <entry key="app/src/main/res/layout/main_screen.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/main_screen.xml" value="0.22" />
         <entry key="app/src/main/res/layout/main_screen_new.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/popup_date_picker.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/popup_time_picker.xml" value="0.33" />

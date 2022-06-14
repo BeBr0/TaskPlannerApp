@@ -36,4 +36,6 @@
     <string name="error_forbidden_symbols">Name or description contain forbidden symbols</string>
     <string name="date">Date:</string>
     <string name="time">Time:</string>
+    <string name="light_theme">Light theme</string>
+    <string name="dark_theme">Dark theme</string>
 </resources>

@@ -1,9 +1,15 @@
 package edu.vlsu.taskplanner;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +17,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import edu.vlsu.taskplanner.settings.Theme;
 import edu.vlsu.taskplanner.tasks.Task;
@@ -20,6 +28,7 @@ import edu.vlsu.taskplanner.tasks.TaskViewAdapter;
 public class MainScreen extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private SwitchMaterial themeSwitch;
 
     @Override
     public Resources.Theme getTheme(){
@@ -39,6 +48,19 @@ public class MainScreen extends AppCompatActivity {
         setContentView(R.layout.main_screen);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
+        themeSwitch = findViewById(R.id.theme_switcher);
+        themeSwitch.setOnClickListener(this::onSwitch);
+
+        TextView themeName = findViewById(R.id.theme_name);
+        if (SettingsController.currentTheme == Theme.LIGHT) {
+            themeName.setText(R.string.light_theme);
+            themeSwitch.setActivated(false);
+        }
+        else if (SettingsController.currentTheme == Theme.DARK) {
+            themeName.setText(R.string.dark_theme);
+            themeSwitch.setActivated(true);
+        }
+
         setupRecyclerView();
         setupDrawer();
 
@@ -46,6 +68,20 @@ public class MainScreen extends AppCompatActivity {
             Intent intent = new Intent(MainScreen.this, EditTaskScreen.class);
             startActivity(intent);
         });
+    }
+
+    private void onSwitch(View view){
+        if (themeSwitch.isActivated()){
+            SettingsController.currentTheme = Theme.LIGHT;
+        }
+        else{
+            SettingsController.currentTheme = Theme.DARK;
+        }
+
+        Intent mStartActivity = new Intent(this, LoadScreen.class);
+        Database.getInstance().writeSettings();
+        startActivity(mStartActivity);
+        System.exit(0);
     }
 
     @Override

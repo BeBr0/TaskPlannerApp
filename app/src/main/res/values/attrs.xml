@@ -6,4 +6,5 @@
     <attr name="picker" format="reference"/>
 
     <attr name="form_item" format="reference"/>
+    <attr name="drawer_top" format="reference"/>
 </resources>

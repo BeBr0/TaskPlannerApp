@@ -36,6 +36,8 @@ public class LoadScreen extends AppCompatActivity {
     }
 
     private void loadDataFromDataBase(){
+        Database.getInstance().loadSettings();
+
         Cursor cursor = Database.getInstance().getReadableDatabase().rawQuery("SELECT * FROM tasks",null);
         while (cursor.moveToNext()) {
             Calendar startTime = Calendar.getInstance();
