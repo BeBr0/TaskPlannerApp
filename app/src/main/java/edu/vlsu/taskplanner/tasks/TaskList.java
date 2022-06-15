@@ -40,7 +40,7 @@ public abstract class TaskList{
     }
 
     public static void add(Task task){
-        Database.getInstance().writeTaskToDB(task);
+        Database.getInstance().writeTask(task);
 
         TaskList.taskList.add(task);
     }
@@ -58,8 +58,11 @@ public abstract class TaskList{
         }
 
         for (Task t: TaskList.taskList){
-            if (t.getId() == task.getId())
+            if (t.getDisplayName().equals(task.getDisplayName())) {
                 TaskList.taskList.set(TaskList.taskList.indexOf(t), task);
+                remove(task);
+                add(task);
+            }
         }
     }
 

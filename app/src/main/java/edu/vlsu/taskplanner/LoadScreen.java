@@ -50,7 +50,7 @@ public class LoadScreen extends AppCompatActivity {
                     cursor.getString(2),
                     startTime,
                     Boolean.parseBoolean(cursor.getString(4)),
-                    TaskGroup.getItemByName(cursor.getString(5))
+                    TaskGroup.getItem(cursor.getString(5))
             );
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date(Long.parseLong(cursor.getString(6))));

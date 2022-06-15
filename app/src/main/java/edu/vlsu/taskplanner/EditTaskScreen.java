@@ -64,8 +64,6 @@ public class EditTaskScreen extends AppCompatActivity {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
-        createSpinner();
-
         int index = getIntent().getIntExtra("task", -1);
 
         date = findViewById(R.id.form_start_date);
@@ -79,6 +77,8 @@ public class EditTaskScreen extends AppCompatActivity {
             updateScreenTexts();
             ((CheckBox) findViewById(R.id.notification_check)).setChecked(newTask.isAlarmNeeded());
         }
+
+        createSpinner();
 
         findViewById(R.id.submit_task).setOnClickListener(this::submitTask);
 
@@ -176,7 +176,7 @@ public class EditTaskScreen extends AppCompatActivity {
         newTask.setDescription(description.getText().toString());
         newTask.setAlarmNeeded(notify.isChecked(), view.getContext());
 
-        newTask.setTaskGroup(TaskGroup.getItemByName(spinner.getSelectedItem().toString()));
+        newTask.setTaskGroup(TaskGroup.getItem(spinner.getSelectedItemPosition()));
 
         newTask.setTimeOfCreation(Calendar.getInstance());
 
@@ -218,5 +218,7 @@ public class EditTaskScreen extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, spinnerItems);
         spinner.setAdapter(adapter);
+
+        spinner.setSelection(TaskGroup.getId(newTask.getTaskGroup()));
     }
 }

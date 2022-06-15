@@ -1,5 +1,7 @@
 package edu.vlsu.taskplanner.tasks;
 
+import android.content.Context;
+
 import androidx.annotation.IdRes;
 import androidx.annotation.StringRes;
 
@@ -26,12 +28,25 @@ public enum TaskGroup {
         return name;
     }
 
-    public static TaskGroup getItemByName(String name){
+    public static TaskGroup getItem(String name){
         for (TaskGroup taskGroup: TaskGroup.values()){
-            if (taskGroup.systemName.equals(name))
+            if (name.equals(taskGroup.systemName))
                 return taskGroup;
         }
 
         return null;
+    }
+
+    public static TaskGroup getItem(int id){
+        return values()[id];
+    }
+
+    public static int getId(TaskGroup taskGroup){
+        for (int i = 0; i< values().length; i++){
+            if (values()[i] == taskGroup)
+                return i;
+        }
+
+        return -1;
     }
 }

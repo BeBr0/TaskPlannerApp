@@ -66,7 +66,7 @@ public class Database extends  SQLiteOpenHelper{
         onCreate(sqLiteDatabase);
     }
 
-    public void writeTaskToDB(Task task){
+    public void writeTask(Task task){
         ContentValues contentValues = new ContentValues();
         contentValues.put(ID_COLUMN, task.getId());
         contentValues.put(NAME_COLUMN, task.getDisplayName());
