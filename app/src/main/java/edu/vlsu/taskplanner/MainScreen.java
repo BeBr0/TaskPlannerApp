@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
+import java.util.Locale;
+
 import edu.vlsu.taskplanner.settings.Theme;
 import edu.vlsu.taskplanner.tasks.Task;
 import edu.vlsu.taskplanner.tasks.TaskList;

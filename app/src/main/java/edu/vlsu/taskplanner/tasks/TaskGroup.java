@@ -22,7 +22,7 @@ public enum TaskGroup {
         this.systemName = systemName;
     }
 
-    public int getName() {
+    public @StringRes int getName() {
         return name;
     }
 
