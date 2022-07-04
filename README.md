@@ -7,7 +7,7 @@ Android application for task management. App was designed as an educational proj
 # Features
 * Adding, removing, editing tasks
 * 3 languages implemented (English, Russian, Arabic)
-* 2 swwitchable themes available
+* 2 switchable themes available
 * Cool design
 
 # Social links
